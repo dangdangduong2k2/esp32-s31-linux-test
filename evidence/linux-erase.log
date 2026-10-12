@@ -1,0 +1,19 @@
+esptool v5.5.0
+Serial port COM56:
+Connecting.....
+Connected to ESP32-S31 on COM56:
+Chip type:          ESP32-S31 (revision v0.0)
+Features:           Wi-Fi 6, BT 5.4 (LE), IEEE802.15.4, Dual Core + LP Core, 300MHz
+Crystal frequency:  40MHz
+MAC:                [REDACTED]
+
+Uploading stub flasher...
+Running stub flasher...
+Stub flasher running.
+Changing baud rate to 460800...
+Changed.
+
+Erasing flash memory (this may take a while)...
+Flash memory erased successfully in 2.0 seconds.
+
+Hard resetting via RTS pin...

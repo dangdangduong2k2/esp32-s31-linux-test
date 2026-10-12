@@ -1,0 +1,17 @@
+{
+  "provider": "GrieferPig/esp32-s31-linux (community, not an Espressif release)",
+  "tag": "ci-d74660b8f90c-34182145900",
+  "release_url": "https://github.com/GrieferPig/esp32-s31-linux/releases/tag/ci-d74660b8f90c-34182145900",
+  "url": "https://github.com/GrieferPig/esp32-s31-linux/releases/download/ci-d74660b8f90c-34182145900/s31_full_flash.bin",
+  "size": 14880768,
+  "sha256": "f9a86a8e902257f7ef680a4555badc602d81da82fa02d6110711b46c6c1f7c2c",
+  "offset": "0x0",
+  "flash_mode": "dio",
+  "flash_freq": "80m",
+  "flash_size": "16MB",
+  "rootfs": "SquashFS, distinct from official minimal cramfs configuration",
+  "source_commit": "d74660b8f90c6fd0c16b54115320e748766c6df7",
+  "observed_kernel": "6.18.0-g888671b7ed45",
+  "tested_date": "2026-10-12",
+  "binary_rebuilt_locally": false
+}

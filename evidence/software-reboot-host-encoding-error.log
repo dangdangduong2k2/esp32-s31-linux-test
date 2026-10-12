@@ -1,0 +1,57 @@
+
+[HOST 2026-10-12T06:21:28.523832+00:00] BEGIN mode=software cycle=1
+sync; reboot
+~ # Stopping crond: stopped /usr/sbin/crond (pid 423)
+OK
+Stopping network: OK
+Stopping klogd: stopped /sbin/klogd (pid 325)
+OK
+Stopping syslogd: stopped /sbin/syslogd (pid 321)
+OK
+Seeding 256 bits and crediting
+Saving 256 bits of creditable seed for next boot
+Stopping swap: OK
+umount: devtmpfs busy - remounted read-only
+The system is going down NOW!
+Sent SIGTERM to all processes
+Sent SIGKILL to all processes
+Requesting system reboot
+[ öESP-ROM:esp32s31-20251218
+Build:Dec 18 2025
+rst:0x3 (SW_SYS_RESET),boot:0x58 (SPI_FAST_FLASH_BOOT)
+Core0 Saved PC:0x2f805a2a
+SPI mode:DIO, clock di
+U-Boot SPL 2024.07-g06fe89c9 (Sep 08 2026 - 03:05:39 +0000)
+ESP32-S31 SPL active
+flash-qio: QIO @ 80 MHz + auto-suspend enabled
+Trying to boot from NOR
+
+
+U-Boot 2024.07-g06fe89c9 (Sep 08 2026 - 03:05:39 +0000)
+
+DRAM:  320 KiB (effective 16.3 MiB)
+Core:  8 devices, 6 uclasses, devicetree: board
+Loading Environment from nowhere... OK
+In:    serial@2038A000
+Out:   serial@2038A000
+Err:   serial@2038A000
+ESP32-S31 U-Boot active
+Hit any key to stop autoboot:  0 
+## Flattened Device Tree blob at 40200000
+   Booting using the fdt blob at 0x40200000
+   Loading Device Tree to 50ff6000, end 50fff6c7 ... OK
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on hartid 0
+[    0.000000] Linux version 6.18.0-g888671b7ed45 (runner@runnervmejwal) (riscv32-esp-linux-musl-gcc (crosstool-NG esp-16.0.0_00000000.33-d799a78) 15.2.0, GNU ld (crosstool-NG esp-16.0.0_00000000.33-d799a78) 2.45) #1 SMP Tue Sep  8 03:15:12 UTC 2026
+[    0.000000] Machine model: Espressif ESP32-S31 S-mode (generic)
+[    0.000000] SBI specification v3.0 detected
+[    0.000000] SBI implementation ID=0x1 Version=0x10009
+[    0.000000] SBI TIME extension detected
+[    0.000000] SBI IPI extension detected
+[    0.000000] SBI RFENCE extension detected
+[    0.000000] SBI SRST extension detected
+[    0.000000] SBI DBCN extension detected
+[    0.000000] earlycon: esp32s31uart0 at MMIO 0x2038a000 (options '115200')
+[    0.000000] printk: legacy bootconsole [esp32s31uart0] enabled

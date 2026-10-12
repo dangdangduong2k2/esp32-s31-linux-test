@@ -1,0 +1,22 @@
+echo ===SERVICES_SETTLED===; cat /proc/uptime; cat /run/rcS.status /run/rcS.
+log; ls -l /run/rcS.done; cat /proc/net/dev; sync; echo ===SERVICES_SETTLED_END=
+==
+===SERVICES_SETTLED===
+33.66 29.74
+0
+Starting USB swap: no /dev/sd* device found
+Starting swap: no swap device enabled
+Saving 256 bits of creditable seed for next boot
+Starting syslogd: OK
+Starting klogd: OK
+Running sysctl: OK
+Starting network: OK
+Applying ESP32 persistent configuration: Wi-Fi disabled.
+OK
+Starting crond: OK
+-rw-r--r--    1 root     root             0 Jan  1 00:00 [0;0m/run/rcS.done[m
+Inter-|   Receive                                                |  Transmit
+ face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed
+    lo:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0
+===SERVICES_SETTLED_END===
+~ # 

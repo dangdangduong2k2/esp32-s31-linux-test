@@ -1,0 +1,59 @@
+echo ===SERVICES===; cat /run/rcS.status /run/rcS.log; ls -l /run/rcS.done; 
+ps; cat /proc/uptime; echo ===SERVICES_END===
+===SERVICES===
+cat: can't open '/run/rcS.status': No such file or directory
+ls: /run/rcS.done: No such file or directory
+PID   USER     COMMAND
+    1 root     init
+    2 root     [kthreadd]
+    3 root     [pool_workqueue_]
+    4 root     [kworker/R-rcu_g]
+    5 root     [kworker/R-sync_]
+    6 root     [kworker/0:0-rcu]
+    7 root     [kworker/0:0H-kb]
+    8 root     [kworker/0:1-mm_]
+    9 root     [kworker/u8:0-ip]
+   10 root     [kworker/R-mm_pe]
+   11 root     [ksoftirqd/0]
+   12 root     [rcu_sched]
+   13 root     [rcu_exp_par_gp_]
+   14 root     [rcu_exp_gp_kthr]
+   15 root     [migration/0]
+   16 root     [cpuhp/0]
+   17 root     [cpuhp/1]
+   18 root     [migration/1]
+   19 root     [ksoftirqd/1]
+   20 root     [kworker/1:0-eve]
+   21 root     [kworker/1:0H-kb]
+   22 root     [kworker/u9:0-ev]
+   23 root     [kworker/u10:0-a]
+   24 root     [kdevtmpfs]
+   25 root     [kworker/R-inet_]
+   26 root     [oom_reaper]
+   27 root     [kworker/R-write]
+   28 root     [kcompactd0]
+   29 root     [kworker/R-kbloc]
+   30 root     [watchdogd]
+   31 root     [kworker/1:1-mm_]
+   32 root     [kworker/R-cfg80]
+   33 root     [kworker/u9:1]
+   34 root     [kswapd0]
+   35 root     [kworker/u11:0]
+   36 root     [hwrng]
+   37 root     [kworker/u10:1-e]
+   39 root     [kworker/R-mld]
+   40 root     [kworker/R-ipv6_]
+   41 root     [kworker/u8:1]
+   42 root     [kworker/u9:2]
+   43 root     [kworker/0:1H]
+   61 root     [jffs2_gcd_mtd5]
+  122 root     [kworker/1:1H]
+  145 root     /bin/sh -c (/bin/dmesg -n 1; /etc/init.d/rcS </dev/null >/run/rc
+  146 root     -sh
+  148 root     {rcS} /bin/sh /etc/init.d/rcS
+  167 root     {S01s31-swap} /bin/sh /etc/init.d/S01s31-swap start
+  170 root     {S01s31-swap} /bin/sh /etc/init.d/S01s31-swap start
+  264 root     ps
+20.62 18.11
+===SERVICES_END===
+~ # 

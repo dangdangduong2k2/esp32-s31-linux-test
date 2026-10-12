@@ -1,0 +1,440 @@
+
+[HOST 2026-10-12T06:21:55.455534+00:00] BEGIN mode=software cycle=1
+sync; reboot
+~ # Stopping crond: no /usr/sbin/crond found; none killed
+FAIL
+Stopping network: ifdown: interface lo not configured
+OK
+Stopping klogd: no /sbin/klogd found; none killed
+FAIL
+Stopping syslogd: no /sbin/syslogd found; none killed
+FAIL
+Saving 256 bits of creditable seed for next boot
+Stopping swap: OK
+umount: can't remount tmpfs read-only
+umount: devtmpfs busy - remounted read-only
+The system is going down NOW!
+Sent SIGTERM to all processes
+Sent SIGKILL to all processes
+Requesting system reboot
+[ øESP-ROM:esp32s31-20251218
+Build:Dec 18 2025
+rst:0x3 (SW_SYS_RESET),boot:0x58 (SPI_FAST_FLASH_BOOT)
+Core0 Saved PC:0x2f805a2a
+SPI mode:DIO, clock di
+U-Boot SPL 2024.07-g06fe89c9 (Sep 08 2026 - 03:05:39 +0000)
+ESP32-S31 SPL active
+flash-qio: QIO @ 80 MHz + auto-suspend enabled
+Trying to boot from NOR
+
+
+U-Boot 2024.07-g06fe89c9 (Sep 08 2026 - 03:05:39 +0000)
+
+DRAM:  320 KiB (effective 16.3 MiB)
+Core:  8 devices, 6 uclasses, devicetree: board
+Loading Environment from nowhere... OK
+In:    serial@2038A000
+Out:   serial@2038A000
+Err:   serial@2038A000
+ESP32-S31 U-Boot active
+Hit any key to stop autoboot:  0 
+## Flattened Device Tree blob at 40200000
+   Booting using the fdt blob at 0x40200000
+   Loading Device Tree to 50ff6000, end 50fff6c7 ... OK
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on hartid 0
+[    0.000000] Linux version 6.18.0-g888671b7ed45 (runner@runnervmejwal) (riscv32-esp-linux-musl-gcc (crosstool-NG esp-16.0.0_00000000.33-d799a78) 15.2.0, GNU ld (crosstool-NG esp-16.0.0_00000000.33-d799a78) 2.45) #1 SMP Tue Sep  8 03:15:12 UTC 2026
+[    0.000000] Machine model: Espressif ESP32-S31 S-mode (generic)
+[    0.000000] SBI specification v3.0 detected
+[    0.000000] SBI implementation ID=0x1 Version=0x10009
+[    0.000000] SBI TIME extension detected
+[    0.000000] SBI IPI extension detected
+[    0.000000] SBI RFENCE extension detected
+[    0.000000] SBI SRST extension detected
+[    0.000000] SBI DBCN extension detected
+[    0.000000] earlycon: esp32s31uart0 at MMIO 0x2038a000 (options '115200')
+[    0.000000] printk: legacy bootconsole [esp32s31uart0] enabled
+[    0.000000] OF: reserved mem: Reserved memory: No reserved-memory node in the DT
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000050000000-0x0000000050ffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000050000000-0x0000000050ffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000050000000-0x0000000050ffffff]
+[    0.000000] Failed to add a System RAM resource at 50000000
+[    0.000000] SBI HSM extension detected
+[    0.000000] riscv: base ISA extensions acfim
+[    0.000000] riscv: ELF capabilities acfim
+[    0.000000] Ticket spinlock: enabled
+[    0.000000] percpu: Embedded 14 pages/cpu s27596 r8192 d21556 u57344
+[    0.000000] Kernel command line: earlycon=esp32s31uart,mmio,0x2038a000,115200 console=ttyS0,115200n8 rootfstype=squashfs ro init=/init irqaffinity=0 esp32s31_idle=wfi
+[    0.000000] printk: log buffer data + meta data: 16384 + 51200 = 67584 bytes
+[    0.000000] Dentry cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 4096
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-1, MinObjects=0, CPUs=2, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] riscv-intc: 48 local interrupts mapped
+[    0.000000] esp-clic: 32 external slots (IDs 16-47), chained on /cpus/cpu@0/interrupt-controller
+[    0.000000] esp32s31-smp: hart0 CLIC mintstatus=0x0 mintthresh=0xf mip=0x0 mie=0x0
+[    0.000000] esp32s31-smp: hart-local IPI slot 40, direct timer slot 41
+[    0.000000] esp-intmtx: 178 sources, parent /soc/interrupt-controller@10a00000; 30 device slots, hart0 pinned
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0x49cd42e204, max_idle_ns: 440795202125 ns
+[    0.000023] sched_clock: 64 bits at 320MHz, resolution 3ns, wraps every 4398046511103ns
+[    0.009085] clocksource: esp32s31_systimer: mask: 0xfffffffffffff max_cycles: 0x3b0a9be80, max_idle_ns: 440795202120 ns
+[    0.018693] registered 16 MHz always-on clocksource
+[    0.024829] Calibrating delay loop (skipped), value calculated using timer frequency.. 640.00 BogoMIPS (lpj=3200000)
+[    0.034023] pid_max: default: 4096 minimum: 301
+[    0.040379] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.045936] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.086942] ASID allocator disabled for ESP32-S31 TLB coherency
+[    0.090695] rcu: Hierarchical SRCU implementation.
+[    0.091077] rcu: 	Max phase no-delay instances is 1000.
+[    0.100022] Timer migration: 1 hierarchy levels; 8 children per group; 1 crossnode level
+[    0.109031] smp: Bringing up secondary CPUs ...
+[    0.124020] S31 SMP: cpu1 start hart1 boot_addr=4040011e hsm_data=50050064 sym_pa=4040011e
+[    0.125478] S31 SMP: using IRQ-enabled idle polling
+[    0.126240] esp32s31-smp: hart1 CLIC mintstatus=0x0 mintthresh=0xf mip=0x0 mie=0x0
+[    0.129332] S31 SMP: cpu1 online
+[    0.141035] smp: Brought up 1 node, 2 CPUs
+[    0.155600] Memory: 15144K/16384K available (4676K kernel code, 224K rwdata, 992K rodata, 195K init, 95K bss, 800K reserved, 0K cma-reserved)
+[    0.168938] devtmpfs: initialized
+[    0.239826] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.240518] posixtimers hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.247372] futex hash table entries: 16 (1024 bytes on 1 NUMA nodes, total 1 KiB, linear).
+[    0.255441] pinctrl core: initialized pinctrl subsystem
+[    0.276063] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.282414] DMA: preallocated 128 KiB GFP_KERNEL pool for atomic allocations
+[    0.286914] cpuidle: using governor menu
+[    0.291249] suspend: SBI SUSP extension detected
+[    0.292540] esp32s31-cache: DMA and I-cache ops registered via vendor SBI ecall
+[    0.387831] SCSI subsystem initialized
+[    0.392209] usbcore: registered new interface driver usbfs
+[    0.393201] usbcore: registered new interface driver hub
+[    0.394155] usbcore: registered new device driver usb
+[    0.398793] pps_core: LinuxPPS API ver. 1 registered
+[    0.402843] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.411689] PTP clock support registered
+[    0.420038] Advanced Linux Sound Architecture Driver Initialized.
+[    0.431592] Bluetooth: Core ver 2.22
+[    0.432442] NET: Registered PF_BLUETOOTH protocol family
+[    0.432628] Bluetooth: HCI device and connection manager initialized
+[    0.437599] Bluetooth: HCI socket layer initialized
+[    0.441334] Bluetooth: L2CAP socket layer initialized
+[    0.446338] Bluetooth: SCO socket layer initialized
+[    0.465121] clocksource: Switched to clocksource esp32s31_systimer
+[    0.529246] NET: Registered PF_INET protocol family
+[    0.532734] IP idents hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.540081] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.540675] Table-perturb hash table entries: 256 (order: 0, 1024 bytes, linear)
+[    0.547831] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.554147] TCP bind hash table entries: 1024 (order: 2, 16384 bytes, linear)
+[    0.562166] TCP: Hash tables configured (established 1024 bind 1024)
+[    0.569681] UDP hash table entries: 128 (order: 0, 4096 bytes, linear)
+[    0.574000] UDP-Lite hash table entries: 128 (order: 0, 4096 bytes, linear)
+[    0.583543] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    0.633716] workingset: timestamp_bits=30 max_order=12 bucket_order=0
+[    0.639117] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.639608] jffs2: version 2.2. (NAND) Â© 2001-2006 Red Hat, Inc.
+[    1.460369] NET: Registered PF_ALG protocol family
+[    1.493959] esp32s31-pinctrl 20583000.pinctrl: registered 60 GPIOs with pinmux, matrix and IRQ support
+[    1.510832] esp32s31-clock 20587000.clock-controller: boot clocks: cpu=320000000 mem=160000000 sys=106666666 apb=53333333 Hz
+[    1.537470] esp32s31-pmu 20704000.power-controller: HPCNNT runtime power-off enabled, radio vote inactive; modem domains firmware-owned
+[    1.573955] 2038a000.serial: ttyS0 at MMIO 0x2038a000 (irq = 11, base_baud = 2500000) is a ESP32-S31 UART
+[    1.577369] printk: legacy console [ttyS0] enabled
+[    1.577369] printk: legacy console [ttyS0] enabled
+[    1.582239] printk: legacy bootconsole [esp32s31uart0] disabled
+[    1.582239] printk: legacy bootconsole [esp32s31uart0] disabled
+[    1.619211] 20391000.serial: ttyGS0 at MMIO 0x20391000 (irq = 12, base_baud = 0) is a ESP32S3 ACM
+[    1.639620] random: crng init done
+[    1.710203] 7 fixed-partitions partitions found on MTD device 40000000.flash
+[    1.710748] Creating 7 MTD partitions on "40000000.flash":
+[    1.712207] 0x000000000000-0x000000200000 : "u-boot-fit"
+[    1.743441] 0x000000200000-0x000000210000 : "dtb"
+[    1.769971] 0x000000210000-0x000000400000 : "radio-bundle"
+[    1.794550] 0x000000400000-0x000000a30000 : "linux"
+[    1.820425] 0x000000a30000-0x000000ac0000 : "persist"
+[    1.848473] 0x000000ac0000-0x000000ad0000 : "hil-scratch"
+[    1.872004] 0x000000ad0000-0x000000f00000 : "rootfs"
+[    1.897004] mtd: setting mtd7 (rootfs) as root device
+[    1.897817] esp32s31-flash-mtd 40000000.flash: registered 15360 KiB writable XIP Flash MTD window
+[    1.912375] CAN device driver interface
+[    1.919337] usbcore: registered new interface driver usb-storage
+[    1.928875] i2c_dev: i2c /dev entries driver
+[    1.941968] esp32s31-smp: concurrent per-hart WFI enabled (M-mode guard)
+[    1.948154] Synopsys Designware Multimedia Card Interface Driver
+[    1.952412] usbcore: registered new interface driver usbhid
+[    1.952708] usbhid: USB HID core driver
+[    1.987105] remoteproc remoteproc0: esp32s31-lp is available
+[    1.987651] esp32s31-lp 2e000000.remoteproc: LP-core remoteproc and mailbox registered
+[    2.033697] NET: Registered PF_INET6 protocol family
+[    2.064229] Segment Routing with IPv6
+[    2.070167] In-situ OAM (IOAM) with IPv6
+[    2.072087] NET: Registered PF_PACKET protocol family
+[    2.072350] can: controller area network core
+[    2.074416] NET: Registered PF_CAN protocol family
+[    2.079552] can: raw protocol
+[    2.232911] esp32s31-usb-phy 20380000.phy: integrated 16-bit UTMI+ PHY registered
+[    2.248131] dwc2 20300000.usb: supply vusb_d not found, using dummy regulator
+[    2.252149] dwc2 20300000.usb: supply vusb_a not found, using dummy regulator
+[    2.282162] dwc2 20300000.usb: DWC OTG Controller
+[    2.283148] dwc2 20300000.usb: new USB bus registered, assigned bus number 1
+[    2.283940] dwc2 20300000.usb: irq 14, io mem 0x20300000
+[    2.311867] hub 1-0:1.0: USB hub found
+[    2.313659] hub 1-0:1.0: 1 port detected
+[    2.334406] clk: Disabling unused clocks
+[    2.344118] faux_driver regulatory: Direct firmware load for regulatory.db failed with error -2
+[    2.347497] cfg80211: failed to load regulatory.db
+[    2.350471] PM: genpd: Disabling unused power domains
+[    2.352183] ALSA device list:
+[    2.357888]   No soundcards found.
+[    2.362257] check access for rdinit=/init failed: -2, ignoring
+[    2.380200] VFS: Mounted root (squashfs filesystem) readonly on device 31:7.
+[    2.388523] devtmpfs: mounted
+[    2.390496] Freeing unused kernel image (initmem) memory: 56K
+[    2.390795] This architecture does not have kernel memory protection.
+[    2.392992] Run /init as init process
+[    4.599040] jffs2: notice: (60) jffs2_build_xattr_subsystem: complete building xattr subsystem, 8 of xdatum (0 unchecked, 3 orphan) and 8 of xref (3 dead, 0 orphan) found.
+[    6.733939] overlayfs: upper fs does not support tmpfile.
+[    6.739800] overlayfs: upper fs does not support RENAME_WHITEOUT.
+[    8.776990] init (1): drop_caches: 3
+
+ESP32-S31 Linux (Buildroot)
+esp32-s31 login: root
+login[147]: root login on 'console'
+~ # stty -echo
+~ # ===AFTER_BOOT===
+6.18.0-g888671b7ed45
+11.24 7.31
+0-1
+PASS_PERSIST
+PASS_TMP_CLEARED
+S31_REBOOT_CHECK_END
+
+[HOST 2026-10-12T06:22:14.037388+00:00] PASS mode=software cycle=1
+
+[HOST 2026-10-12T06:22:14.037434+00:00] BEGIN mode=software cycle=2
+~ # sync; reboot
+~ # Stopping crond: no /usr/sbin/crond found; none killed
+FAIL
+Stopping network: ifdown: interface lo not configured
+OK
+Stopping klogd: no /sbin/klogd found; none killed
+FAIL
+Stopping syslogd: no /sbin/syslogd found; none killed
+FAIL
+Saving 256 bits of creditable seed for next boot
+Stopping swap: OK
+umount: can't remount tmpfs read-only
+umount: devtmpfs busy - remounted read-only
+The system is going down NOW!
+Sent SIGTERM to all processes
+Sent SIGKILL to all processes
+Requesting system reboot
+[ ðESP-ROM:esp32s31-20251218
+Build:Dec 18 2025
+rst:0x3 (SW_SYS_RESET),boot:0x58 (SPI_FAST_FLASH_BOOT)
+Core0 Saved PC:0x2f805a2a
+SPI mode:DIO, clock di
+U-Boot SPL 2024.07-g06fe89c9 (Sep 08 2026 - 03:05:39 +0000)
+ESP32-S31 SPL active
+flash-qio: QIO @ 80 MHz + auto-suspend enabled
+Trying to boot from NOR
+
+
+U-Boot 2024.07-g06fe89c9 (Sep 08 2026 - 03:05:39 +0000)
+
+DRAM:  320 KiB (effective 16.3 MiB)
+Core:  8 devices, 6 uclasses, devicetree: board
+Loading Environment from nowhere... OK
+In:    serial@2038A000
+Out:   serial@2038A000
+Err:   serial@2038A000
+ESP32-S31 U-Boot active
+Hit any key to stop autoboot:  0 
+## Flattened Device Tree blob at 40200000
+   Booting using the fdt blob at 0x40200000
+   Loading Device Tree to 50ff6000, end 50fff6c7 ... OK
+
+Starting kernel ...
+
+[    0.000000] Booting Linux on hartid 0
+[    0.000000] Linux version 6.18.0-g888671b7ed45 (runner@runnervmejwal) (riscv32-esp-linux-musl-gcc (crosstool-NG esp-16.0.0_00000000.33-d799a78) 15.2.0, GNU ld (crosstool-NG esp-16.0.0_00000000.33-d799a78) 2.45) #1 SMP Tue Sep  8 03:15:12 UTC 2026
+[    0.000000] Machine model: Espressif ESP32-S31 S-mode (generic)
+[    0.000000] SBI specification v3.0 detected
+[    0.000000] SBI implementation ID=0x1 Version=0x10009
+[    0.000000] SBI TIME extension detected
+[    0.000000] SBI IPI extension detected
+[    0.000000] SBI RFENCE extension detected
+[    0.000000] SBI SRST extension detected
+[    0.000000] SBI DBCN extension detected
+[    0.000000] earlycon: esp32s31uart0 at MMIO 0x2038a000 (options '115200')
+[    0.000000] printk: legacy bootconsole [esp32s31uart0] enabled
+[    0.000000] OF: reserved mem: Reserved memory: No reserved-memory node in the DT
+[    0.000000] Zone ranges:
+[    0.000000]   Normal   [mem 0x0000000050000000-0x0000000050ffffff]
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000050000000-0x0000000050ffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000050000000-0x0000000050ffffff]
+[    0.000000] Failed to add a System RAM resource at 50000000
+[    0.000000] SBI HSM extension detected
+[    0.000000] riscv: base ISA extensions acfim
+[    0.000000] riscv: ELF capabilities acfim
+[    0.000000] Ticket spinlock: enabled
+[    0.000000] percpu: Embedded 14 pages/cpu s27596 r8192 d21556 u57344
+[    0.000000] Kernel command line: earlycon=esp32s31uart,mmio,0x2038a000,115200 console=ttyS0,115200n8 rootfstype=squashfs ro init=/init irqaffinity=0 esp32s31_idle=wfi
+[    0.000000] printk: log buffer data + meta data: 16384 + 51200 = 67584 bytes
+[    0.000000] Dentry cache hash table entries: 2048 (order: 1, 8192 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 4096
+[    0.000000] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.000000] SLUB: HWalign=64, Order=0-1, MinObjects=0, CPUs=2, Nodes=1
+[    0.000000] rcu: Hierarchical RCU implementation.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] riscv-intc: 48 local interrupts mapped
+[    0.000000] esp-clic: 32 external slots (IDs 16-47), chained on /cpus/cpu@0/interrupt-controller
+[    0.000000] esp32s31-smp: hart0 CLIC mintstatus=0x0 mintthresh=0xf mip=0x0 mie=0x0
+[    0.000000] esp32s31-smp: hart-local IPI slot 40, direct timer slot 41
+[    0.000000] esp-intmtx: 178 sources, parent /soc/interrupt-controller@10a00000; 30 device slots, hart0 pinned
+[    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.000000] clocksource: riscv_clocksource: mask: 0xffffffffffffffff max_cycles: 0x49cd42e204, max_idle_ns: 440795202125 ns
+[    0.000023] sched_clock: 64 bits at 320MHz, resolution 3ns, wraps every 4398046511103ns
+[    0.009082] clocksource: esp32s31_systimer: mask: 0xfffffffffffff max_cycles: 0x3b0a9be80, max_idle_ns: 440795202120 ns
+[    0.018692] registered 16 MHz always-on clocksource
+[    0.024828] Calibrating delay loop (skipped), value calculated using timer frequency.. 640.00 BogoMIPS (lpj=3200000)
+[    0.034022] pid_max: default: 4096 minimum: 301
+[    0.040377] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.045937] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.086940] ASID allocator disabled for ESP32-S31 TLB coherency
+[    0.090697] rcu: Hierarchical SRCU implementation.
+[    0.091080] rcu: 	Max phase no-delay instances is 1000.
+[    0.100006] Timer migration: 1 hierarchy levels; 8 children per group; 1 crossnode level
+[    0.109014] smp: Bringing up secondary CPUs ...
+[    0.124032] S31 SMP: cpu1 start hart1 boot_addr=4040011e hsm_data=50050064 sym_pa=4040011e
+[    0.125081] S31 SMP: using IRQ-enabled idle polling
+[    0.126717] esp32s31-smp: hart1 CLIC mintstatus=0x0 mintthresh=0xf mip=0x0 mie=0x0
+[    0.129867] S31 SMP: cpu1 online
+[    0.140890] smp: Brought up 1 node, 2 CPUs
+[    0.155487] Memory: 15144K/16384K available (4676K kernel code, 224K rwdata, 992K rodata, 195K init, 95K bss, 800K reserved, 0K cma-reserved)
+[    0.168822] devtmpfs: initialized
+[    0.240453] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+[    0.241149] posixtimers hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.247849] futex hash table entries: 16 (1024 bytes on 1 NUMA nodes, total 1 KiB, linear).
+[    0.256034] pinctrl core: initialized pinctrl subsystem
+[    0.276670] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.283046] DMA: preallocated 128 KiB GFP_KERNEL pool for atomic allocations
+[    0.287473] cpuidle: using governor menu
+[    0.291750] suspend: SBI SUSP extension detected
+[    0.292236] esp32s31-cache: DMA and I-cache ops registered via vendor SBI ecall
+[    0.389354] SCSI subsystem initialized
+[    0.393752] usbcore: registered new interface driver usbfs
+[    0.394749] usbcore: registered new interface driver hub
+[    0.395718] usbcore: registered new device driver usb
+[    0.400366] pps_core: LinuxPPS API ver. 1 registered
+[    0.404374] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.413228] PTP clock support registered
+[    0.421650] Advanced Linux Sound Architecture Driver Initialized.
+[    0.433120] Bluetooth: Core ver 2.22
+[    0.433971] NET: Registered PF_BLUETOOTH protocol family
+[    0.434155] Bluetooth: HCI device and connection manager initialized
+[    0.438101] Bluetooth: HCI socket layer initialized
+[    0.443954] Bluetooth: L2CAP socket layer initialized
+[    0.447971] Bluetooth: SCO socket layer initialized
+[    0.467561] clocksource: Switched to clocksource esp32s31_systimer
+[    0.533950] NET: Registered PF_INET protocol family
+[    0.539063] IP idents hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.544716] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+[    0.545304] Table-perturb hash table entries: 256 (order: 0, 1024 bytes, linear)
+[    0.552856] TCP established hash table entries: 1024 (order: 0, 4096 bytes, linear)
+[    0.560290] TCP bind hash table entries: 1024 (order: 2, 16384 bytes, linear)
+[    0.566311] TCP: Hash tables configured (established 1024 bind 1024)
+[    0.574799] UDP hash table entries: 128 (order: 0, 4096 bytes, linear)
+[    0.579946] UDP-Lite hash table entries: 128 (order: 0, 4096 bytes, linear)
+[    0.589254] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    0.643170] workingset: timestamp_bits=30 max_order=12 bucket_order=0
+[    0.645872] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.646312] jffs2: version 2.2. (NAND) Â© 2001-2006 Red Hat, Inc.
+[    1.489933] NET: Registered PF_ALG protocol family
+[    1.524813] esp32s31-pinctrl 20583000.pinctrl: registered 60 GPIOs with pinmux, matrix and IRQ support
+[    1.542930] esp32s31-clock 20587000.clock-controller: boot clocks: cpu=320000000 mem=160000000 sys=106666666 apb=53333333 Hz
+[    1.572124] esp32s31-pmu 20704000.power-controller: HPCNNT runtime power-off enabled, radio vote inactive; modem domains firmware-owned
+[    1.609279] 2038a000.serial: ttyS0 at MMIO 0x2038a000 (irq = 11, base_baud = 2500000) is a ESP32-S31 UART
+[    1.610391] printk: legacy console [ttyS0] enabled
+[    1.610391] printk: legacy console [ttyS0] enabled
+[    1.619061] printk: legacy bootconsole [esp32s31uart0] disabled
+[    1.619061] printk: legacy bootconsole [esp32s31uart0] disabled
+[    1.656029] 20391000.serial: ttyGS0 at MMIO 0x20391000 (irq = 12, base_baud = 0) is a ESP32S3 ACM
+[    1.675676] random: crng init done
+[    1.746476] 7 fixed-partitions partitions found on MTD device 40000000.flash
+[    1.747029] Creating 7 MTD partitions on "40000000.flash":
+[    1.750118] 0x000000000000-0x000000200000 : "u-boot-fit"
+[    1.774949] 0x000000200000-0x000000210000 : "dtb"
+[    1.801260] 0x000000210000-0x000000400000 : "radio-bundle"
+[    1.826206] 0x000000400000-0x000000a30000 : "linux"
+[    1.852496] 0x000000a30000-0x000000ac0000 : "persist"
+[    1.880216] 0x000000ac0000-0x000000ad0000 : "hil-scratch"
+[    1.904033] 0x000000ad0000-0x000000f00000 : "rootfs"
+[    1.929572] mtd: setting mtd7 (rootfs) as root device
+[    1.930376] esp32s31-flash-mtd 40000000.flash: registered 15360 KiB writable XIP Flash MTD window
+[    1.944903] CAN device driver interface
+[    1.951952] usbcore: registered new interface driver usb-storage
+[    1.961946] i2c_dev: i2c /dev entries driver
+[    1.974180] esp32s31-smp: concurrent per-hart WFI enabled (M-mode guard)
+[    1.980763] Synopsys Designware Multimedia Card Interface Driver
+[    1.984922] usbcore: registered new interface driver usbhid
+[    1.985218] usbhid: USB HID core driver
+[    2.019398] remoteproc remoteproc0: esp32s31-lp is available
+[    2.019951] esp32s31-lp 2e000000.remoteproc: LP-core remoteproc and mailbox registered
+[    2.065580] NET: Registered PF_INET6 protocol family
+[    2.099053] Segment Routing with IPv6
+[    2.102841] In-situ OAM (IOAM) with IPv6
+[    2.104697] NET: Registered PF_PACKET protocol family
+[    2.104967] can: controller area network core
+[    2.108906] NET: Registered PF_CAN protocol family
+[    2.111160] can: raw protocol
+[    2.266364] esp32s31-usb-phy 20380000.phy: integrated 16-bit UTMI+ PHY registered
+[    2.284080] dwc2 20300000.usb: supply vusb_d not found, using dummy regulator
+[    2.286214] dwc2 20300000.usb: supply vusb_a not found, using dummy regulator
+[    2.312135] dwc2 20300000.usb: DWC OTG Controller
+[    2.313101] dwc2 20300000.usb: new USB bus registered, assigned bus number 1
+[    2.313883] dwc2 20300000.usb: irq 14, io mem 0x20300000
+[    2.342123] hub 1-0:1.0: USB hub found
+[    2.344039] hub 1-0:1.0: 1 port detected
+[    2.362137] clk: Disabling unused clocks
+[    2.366730] faux_driver regulatory: Direct firmware load for regulatory.db failed with error -2
+[    2.371334] PM: genpd: Disabling unused power domains
+[    2.372656] ALSA device list:
+[    2.372984]   No soundcards found.
+[    2.379177] cfg80211: failed to load regulatory.db
+[    2.384457] check access for rdinit=/init failed: -2, ignoring
+[    2.402602] VFS: Mounted root (squashfs filesystem) readonly on device 31:7.
+[    2.411710] devtmpfs: mounted
+[    2.413681] Freeing unused kernel image (initmem) memory: 56K
+[    2.413983] This architecture does not have kernel memory protection.
+[    2.416182] Run /init as init process
+[    4.634576] jffs2: notice: (60) jffs2_build_xattr_subsystem: complete building xattr subsystem, 9 of xdatum (0 unchecked, 4 orphan) and 9 of xref (4 dead, 0 orphan) found.
+[    6.685696] overlayfs: upper fs does not support tmpfile.
+[    6.690896] overlayfs: upper fs does not support RENAME_WHITEOUT.
+[    8.804488] init (1): drop_caches: 3
+
+ESP32-S31 Linux (Buildroot)
+esp32-s31 login: root
+login[146]: root login on 'console'
+~ # stty -echo
+~ # ===AFTER_BOOT===
+6.18.0-g888671b7ed45
+11.28 7.56
+0-1
+PASS_PERSIST
+PASS_TMP_CLEARED
+S31_REBOOT_CHECK_END
+
+[HOST 2026-10-12T06:22:32.614813+00:00] PASS mode=software cycle=2

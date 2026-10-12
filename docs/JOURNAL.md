@@ -14,6 +14,17 @@ Các mục dưới đây ghi theo thứ tự thực hiện. Lệnh chuẩn để
 10. Người dùng chọn build bằng GitHub Actions và repo public; chỉ có một cáp nên chuyển cáp từ USB Serial/JTAG sang UART.
 11. Windows nhận CP210x `COM56`, trạng thái driver OK. COM55 biến mất đúng với việc rút cáp khỏi USB Serial/JTAG.
 12. Chuẩn bị repository local, source lock, build workflow, script smoke, tài liệu lỗi và ma trận kiểm thử. Chưa nạp Linux tại mục này.
+13. Tạo repo public dangdangduong2k2/esp32-s31-linux-test và chạy workflow. Run 38204464647 bị GitHub chặn trước job vì account billing lock; giữ annotation JSON. Không có Linux build từ nguồn thành công.
+14. Tìm community release GrieferPig tag ci-d74660b8f90c-34182145900, source commit d74660b8f90c6fd0c16b54115320e748766c6df7. Tải s31_full_flash.bin 14,880,768 byte; SHA-256 f9a86a8e902257f7ef680a4555badc602d81da82fa02d6110711b46c6c1f7c2c. Đây là fallback khác profile chính thức.
+15. Kiểm tra backup và trạng thái bảo mật chip, không thay eFuse. Erase toàn flash cho cài mới, nạp combined image offset 0 với DIO/80m/16MB, baud 460800. esptool xác minh hash, ghi mất 197.2s; log ở evidence/linux-erase.log và linux-flash.log.
+16. Capture boot thấy SPL/U-Boot/Linux 6.18 và login. Người dùng yêu cầu chuyển mọi dữ liệu Codex sang D; tạm ngắt phần test để chuẩn bị migration. Migration chưa hoàn tất tại lúc tiếp tục; mọi dữ liệu S31 mới được lưu ở D, repo hoạt động tách khỏi bản stage để không bị sync migration ghi đè.
+17. Tiếp tục COM56, đăng nhập root không password; kiểm kê uname/cpuinfo/meminfo/mount/MTD. Xác nhận sv32, 2 CPU, MemTotal 15640 kB, OverlayFS rw. Sửa tài liệu để không áp đặc điểm official cramfs lên community image.
+18. Upload và chạy board-smoke.sh: 256 KiB zero-filled file copy/cmp/checksum đạt, root write probe tạo/xóa được, 2 worker 10.000 vòng đạt, loopback 3/3; quan sát 60.10 giây uptime không panic/reset. Kiểm kê chỉ có lo, USB root hub, gpiochip0; I2C node và soundcard vắng.
+19. Tạo marker root persistent và /tmp volatile, sync. Reboot đầu host capture bị UnicodeEncodeError cp1252; board vẫn về shell, marker root còn và /tmp mất. Sửa stdout UTF-8 cả 3 script và giữ log lần lỗi.
+20. Chạy lại 2 software reboot có log đầy đủ và 1 reset RTS: cả 3 lần shell hoạt động, CPU online 0-1, PASS_PERSIST. Một số shutdown dịch vụ FAIL khi reboot nhanh; đọc source inittab thấy rcS chạy nền. Đọc log ở uptime 33.66s có rcS.status=0, rcS.done, các dịch vụ OK; Wi-Fi disabled, không USB swap.
+21. Sync rồi yêu cầu người dùng rút dây 5 giây và cắm lại UART; người dùng xác nhận đã làm. Đăng nhập lại được ở uptime 11.60s, marker root còn. Không capture được ROM/kernel sớm của lần cấp nguồn đó; ghi giới hạn bằng chứng trong RESULTS.
+22. Đọc trạng thái cuối sau cold boot: uptime 392.84s, rcS.status=0, CPU online 0-1, MemAvailable 10356 kB, SwapTotal=0. Kiểm tra đúng nội dung marker trước khi xóa marker do bài test tạo; sync, để Linux và root shell chạy trên board.
+23. Giữ nguyên các boot warning trong ERRORS; phân biệt lỗi đã gặp, giới hạn profile và rủi ro chỉ xảy ra theo điều kiện. Chưa test ngoại vi/mạng ngoài hoặc soak dài hạn. Chuẩn bị commit/push script, docs, log, checksum; không kèm firmware backup. MAC được che trong bản log public, log gốc giữ riêng.
 
 ## Tham chiếu bài kiểm tra LED trước Linux
 

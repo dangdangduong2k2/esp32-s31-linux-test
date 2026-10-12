@@ -1,0 +1,18 @@
+echo ===FINAL_STATE===; uname -a; cat /proc/uptime; cat /run/rcS.status; cat
+ /sys/devices/system/cpu/online; grep -E "MemTotal|MemAvailable|SwapTotal" /proc
+/meminfo; if test "$(cat /root/.s31-persist-probe)" = S31_PERSIST_20261012; then
+ rm -f /root/.s31-persist-probe; echo REMOVED_OWN_PERSIST_PROBE; fi; test ! -e /
+tmp/s31-volatile-probe && echo TMP_PROBE_ABSENT; sync; echo ===FINAL_STATE_END==
+=
+===FINAL_STATE===
+Linux esp32-s31 6.18.0-g888671b7ed45 #1 SMP Tue Sep  8 03:15:12 UTC 2026 riscv32 GNU/Linux
+392.84 748.63
+0
+0-1
+MemTotal:          15640 kB
+MemAvailable:      10356 kB
+SwapTotal:             0 kB
+REMOVED_OWN_PERSIST_PROBE
+TMP_PROBE_ABSENT
+===FINAL_STATE_END===
+~ # 

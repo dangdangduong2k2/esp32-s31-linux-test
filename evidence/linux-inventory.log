@@ -1,0 +1,87 @@
+echo ===INVENTORY===; uname -a; cat /proc/cpuinfo; cat /proc/meminfo; cat /p
+roc/mounts; cat /proc/mtd; cat /proc/net/dev; cat /proc/uptime; echo ===INVENTOR
+Y_END===
+===INVENTORY===
+Linux esp32-s31 6.18.0-g888671b7ed45 #1 SMP Tue Sep  8 03:15:12 UTC 2026 riscv32 GNU/Linux
+processor	: 0
+hart		: 0
+isa		: rv32imafc_zicntr_zicsr_zifencei_zaamo_zalrsc_zca_zcf_zba_zbb_zbc_zbs
+mmu		: sv32
+uarch		: espressif,esp32s31
+mvendorid	: 0x612
+marchid		: 0x80000003
+mimpid		: 0x1
+hart isa	: rv32imafc_zicntr_zicsr_zifencei_zaamo_zalrsc_zca_zcf_zba_zbb_zbc_zbs
+
+processor	: 1
+hart		: 1
+isa		: rv32imafc_zicntr_zicsr_zifencei_zaamo_zalrsc_zca_zcf_zba_zbb_zbc_zbs
+mmu		: sv32
+uarch		: espressif,esp32s31
+mvendorid	: 0x612
+marchid		: 0x80000003
+mimpid		: 0x1
+hart isa	: rv32imafc_zicntr_zicsr_zifencei_zaamo_zalrsc_zca_zcf_zba_zbb_zbc_zbs
+
+MemTotal:          15640 kB
+MemFree:            9084 kB
+MemAvailable:      10404 kB
+Buffers:               0 kB
+Cached:             2204 kB
+SwapCached:            0 kB
+Active:             1620 kB
+Inactive:            756 kB
+Active(anon):         44 kB
+Inactive(anon):      180 kB
+Active(file):       1576 kB
+Inactive(file):      576 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Dirty:                 0 kB
+Writeback:             0 kB
+AnonPages:           216 kB
+Mapped:             1188 kB
+Shmem:                52 kB
+KReclaimable:          0 kB
+Slab:               2512 kB
+SReclaimable:          0 kB
+SUnreclaim:         2512 kB
+KernelStack:         400 kB
+PageTables:          172 kB
+SecPageTables:         0 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:        7820 kB
+Committed_AS:       1024 kB
+VmallocTotal:     524288 kB
+VmallocUsed:         456 kB
+VmallocChunk:          0 kB
+Percpu:              112 kB
+Balloon:               0 kB
+overlay / overlay rw,relatime,lowerdir=/,upperdir=/mnt/store/upper,workdir=/mnt/store/work 0 0
+devtmpfs /dev devtmpfs rw,relatime,size=7792k,nr_inodes=1948,mode=755 0 0
+proc /proc proc rw,relatime 0 0
+sysfs /sys sysfs rw,relatime 0 0
+devpts /dev/pts devpts rw,relatime,mode=600,ptmxmode=000 0 0
+tmpfs /run tmpfs rw,nosuid,nodev,relatime,mode=755 0 0
+tmpfs /tmp tmpfs rw,nosuid,nodev,relatime 0 0
+tmpfs /var/log tmpfs rw,nosuid,nodev,relatime,mode=755 0 0
+proc /proc proc rw,relatime 0 0
+dev:    size   erasesize  name
+mtd0: 00f00000 00002000 "40000000.flash"
+mtd1: 00200000 00002000 "u-boot-fit"
+mtd2: 00010000 00002000 "dtb"
+mtd3: 001f0000 00002000 "radio-bundle"
+mtd4: 00630000 00002000 "linux"
+mtd5: 00090000 00002000 "persist"
+mtd6: 00010000 00002000 "hil-scratch"
+mtd7: 00430000 00002000 "rootfs"
+Inter-|   Receive                                                |  Transmit
+ face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed
+    lo:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0
+5872.42 11401.63
+===INVENTORY_END===
+~ # 

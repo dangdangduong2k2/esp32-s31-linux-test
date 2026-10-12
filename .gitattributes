@@ -3,3 +3,7 @@
 *.py text eol=lf
 *.yml text eol=lf
 *.md text eol=lf
+evidence/** -text
+evidence/*.md text eol=lf
+evidence/*.log -whitespace
+evidence/SHA256SUMS text eol=lf

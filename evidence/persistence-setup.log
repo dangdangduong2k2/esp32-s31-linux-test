@@ -1,0 +1,6 @@
+if test ! -e /root/.s31-persist-probe; then echo S31_PERSIST_20261012 > /roo
+t/.s31-persist-probe; echo VOLATILE > /tmp/s31-volatile-probe; sync; cat /root/.
+s31-persist-probe /tmp/s31-volatile-probe; else echo PROBE_EXISTS_ABORT; fi
+S31_PERSIST_20261012
+VOLATILE
+~ # 

@@ -17,12 +17,12 @@ dd if=/dev/zero of="$probe" bs=1024 count=256
 cp "$probe" "$probe.copy"
 if cmp "$probe" "$probe.copy"; then echo 'PASS temp file 256 KiB'; else echo 'FAIL temp file'; fi
 cksum "$probe" "$probe.copy"
-echo '=== EXPECTED_READ_ONLY_ROOT ==='
+echo '=== ROOT_WRITE_PROFILE ==='
 if touch /.s31-linux-write-probe; then
     rm -f /.s31-linux-write-probe
-    echo 'UNEXPECTED writable root; review image/config'
+    echo 'OBSERVED writable root; expected for tested community OverlayFS image'
 else
-    echo 'EXPECTED read-only root rejection'
+    echo 'OBSERVED root write rejected; expected for official minimal cramfs image'
 fi
 echo '=== CPU_AND_PROCESS_CHECK ==='
 (i=0; while [ "$i" -lt 10000 ]; do i=$((i+1)); done; echo "PASS worker A iterations=$i") &
@@ -30,6 +30,12 @@ pid_a=$!
 (i=0; while [ "$i" -lt 10000 ]; do i=$((i+1)); done; echo "PASS worker B iterations=$i") &
 pid_b=$!
 wait "$pid_a"; wait "$pid_b"
+echo '=== CPU_ONLINE ==='
+cat /sys/devices/system/cpu/online
+cat /proc/stat
+echo '=== LOOPBACK ==='
+ip link set lo up
+ping -c 3 127.0.0.1
 echo '=== NETWORK_INVENTORY ==='
 cat /proc/net/dev
 ip addr 2>&1
@@ -37,6 +43,12 @@ ip route 2>&1
 for p in /sys/class/net/*; do echo "$p"; cat "$p/operstate" "$p/carrier" 2>&1; done
 echo '=== USB_INVENTORY ==='
 ls /sys/bus/usb/devices 2>&1
+echo '=== STABILITY_START ==='
+cat /proc/uptime
+sleep 60
+echo '=== STABILITY_END ==='
+cat /proc/uptime
+cat /proc/meminfo
 echo '=== DMESG ==='
 dmesg
 echo '=== S31_SMOKE_END ==='

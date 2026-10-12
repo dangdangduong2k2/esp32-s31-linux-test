@@ -1,40 +1,34 @@
-# ESP32-S31 Function CoreBoard: Linux bring-up
+# ESP32-S31 Function CoreBoard: kiểm thử Linux trên board thật
 
-Thử nghiệm trên board thật, có lệnh tái lập, nguồn được khóa commit và log kết quả. Tài liệu tiếng Việt.
+**Đã chạy Linux 6.18 đến root shell, kiểm tra RAM/userspace, reboot, reset và khởi động lại sau ngắt nguồn ngày 12/10/2026.** Đây là smoke test, chưa phải kiểm chứng ổn định dài hạn hoặc toàn bộ ngoại vi.
 
-**Trạng thái hiện tại: đang chuẩn bị build; chưa xác nhận Linux khởi động trên board này.**
+Board Function CoreBoard-1, chip rev v0.0, flash vật lý 16 MiB; console CP210x UART 115200 8N1 (COM56). Người dùng chỉ dùng một dây ở cổng UART.
 
-Board: ESP32-S31-Function-CoreBoard-1, chip revision v0.0, NOR flash 16 MiB. LED đỏ đã chạy bằng ESP-IDF, xác nhận kết nối nạp trước bài test Linux. Cấu hình Linux chính thức khai báo 16 MiB PSRAM; dung lượng khả dụng phải kiểm chứng qua boot log và `/proc/meminfo`.
+| Đã đo trên board | Kết quả |
+|---|---|
+| Kernel | `6.18.0-g888671b7ed45`, RISC-V 32-bit, MMU `sv32` |
+| CPU | 2 hart/CPU online, `/sys/devices/system/cpu/online = 0-1` |
+| RAM | MemTotal 15640 kB; MemAvailable 10392 kB đầu smoke, 9780 kB cuối smoke |
+| Tệp tạm | Ghi/copy/cmp 256 KiB đạt; tmpfs mất dữ liệu sau reboot như dự kiến |
+| Userspace | Hai tiến trình 10.000 vòng hoàn tất; ping loopback 3/3 |
+| Lưu bền | Root OverlayFS ghi được; marker còn qua software reboot, RTS reset và ngắt/cấp nguồn |
+| Ổn định ngắn | Uptime 5960.43 → 6020.53 giây, không thấy panic/reset trong cửa sổ này |
+| Khởi động lại | 2 software reboot có log đầy đủ, 1 RTS reset, 1 ngắt/cấp nguồn do người dùng thực hiện đều về shell |
 
-- [Quy trình](docs/PROCEDURE.md): chuẩn bị, build, nạp, test và phục hồi.
-- [Nhật ký](docs/JOURNAL.md): những việc thực sự đã làm.
-- [Lỗi và điều kiện](docs/ERRORS.md): lỗi đã gặp, hành vi tất định theo cấu hình và rủi ro có điều kiện.
-- [Ma trận kết quả](docs/RESULTS.md): PASS / FAIL / BLOCKED / NOT TESTED.
-- [Nguồn khóa phiên bản](sources.lock.json).
+## Image đã test và hướng build còn bị chặn
 
-## Build
+**Image đã nạp là bản cộng đồng [GrieferPig/esp32-s31-linux](https://github.com/GrieferPig/esp32-s31-linux/releases/tag/ci-d74660b8f90c-34182145900)**, tag `ci-d74660b8f90c-34182145900`, commit `d74660b8f90c6fd0c16b54115320e748766c6df7`. Nó dùng SMP, SquashFS + JFFS2/OverlayFS và có IPv6. URL và SHA-256 nằm trong [prebuilt.lock.json](prebuilt.lock.json). SHA xác nhận asset đã tải/nạp, không chứng minh binary được tự build hoặc tái lập từ source trong phiên này.
 
-Chạy workflow **Build ESP32-S31 Linux** trong tab Actions. Workflow chạy trên Ubuntu 24.04, lấy Buildroot 2025.02 và các commit Espressif được khóa, tạo `s31_full_flash.bin` cùng SHA-256, config và log trong artifact. Build thành công chưa chứng minh board chạy Linux.
+Hướng **build cấu hình tối thiểu chính thức Espressif** được giữ trong [sources.lock.json](sources.lock.json), `configs/upstream-*` và workflow. [Actions run 38204464647](https://github.com/dangdangduong2k2/esp32-s31-linux-test/actions/runs/38204464647) không bắt đầu job do tài khoản bị khóa billing. **Chưa có build từ nguồn thành công trong repo này.** Cấu hình chính thức có cramfs chỉ đọc, một CPU node và không bật IPv6; không dùng các đặc điểm đó mô tả image cộng đồng đã test.
 
-Trên Linux/WSL có đủ dung lượng, cài các gói trong workflow rồi chạy:
+## Tài liệu và bằng chứng
 
-```sh
-bash scripts/build.sh
-```
+- [Quy trình tái lập, nạp và phục hồi](docs/PROCEDURE.md).
+- [Nhật ký các bước đã thực hiện](docs/JOURNAL.md).
+- [Ma trận PASS / BLOCKED / NOT TESTED](docs/RESULTS.md).
+- [Lỗi đã gặp, hành vi theo cấu hình và lỗi có điều kiện](docs/ERRORS.md).
+- [Danh mục log và giới hạn bằng chứng](evidence/README.md).
 
-Chỉ build trên filesystem Linux. Không dùng GCC bare-metal của ESP-IDF để thay toolchain Linux musl. Script build không tự nạp board.
+USB chỉ kiểm kê root hub; GPIO có thiết bị character; chưa có `/dev/i2c*` hoặc soundcard trong phiên này. Ethernet, Wi-Fi, Bluetooth, audio và ngoại vi chưa được xác nhận hoạt động. Image cho root login qua UART không hỏi mật khẩu; đây không phải cấu hình để triển khai dịch vụ mạng công khai.
 
-## Phạm vi
-
-Ưu tiên boot đến shell, nhận diện CPU/RAM/flash, tác vụ userspace, tệp tạm, tính chỉ đọc của rootfs, log lỗi và reboot. Ethernet/USB cần thiết bị/cáp tương ứng. Wi-Fi, Bluetooth, audio và mọi GPIO không tự động được xem là đã hỗ trợ chỉ vì board có phần cứng.
-
-Đây là bản Developer Preview của Espressif. Không thể liệt kê mọi lỗi có thể tồn tại; danh mục trong repo bao gồm bằng chứng thực nghiệm và các điều kiện liên quan đến cấu hình đã chọn, không khẳng định lỗi chưa tái hiện là lỗi chắc chắn.
-
-## Nguồn chính
-
-- https://github.com/espressif/esp-buildroot-external
-- https://github.com/espressif/esp-linux-bsp
-- https://github.com/espressif/linux/tree/integration/v6.18-esp32s31
-- https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32s31/esp32-s31-function-coreboard-1/user_guide.html
-
-Các bản sao config/DTS trong `configs/` giữ thông báo bản quyền của upstream; mã nguồn hệ thống được tải trực tiếp từ upstream, không nhập toàn bộ vào repo này. Firmware sao lưu riêng của board không được đưa lên repo public.
+Không thể đảm bảo liệt kê mọi lỗi tồn tại. Repo phân biệt lỗi đã quan sát, điều kiện tất định của từng cấu hình và rủi ro chưa tái hiện. Flash backup riêng được giữ ngoài Git; không upload backup, mật khẩu hoặc token.

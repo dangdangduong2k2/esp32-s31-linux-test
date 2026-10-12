@@ -1,62 +1,120 @@
-# Quy trình test
+# Quy trình tái lập
 
-## 1. Chuẩn bị và nhận diện
+## 1. Chuẩn bị, UART và backup
 
-1. Dùng cáp USB có dữ liệu, nối cổng Type-C UART để xem console Linux. Nếu có hai dây có thể giữ thêm USB Serial/JTAG cho nạp. Không nhầm USB Type-A host với cổng console.
-2. Trên Windows tìm COM bằng `python -m serial.tools.list_ports -v`. Lần test này: USB Serial/JTAG ban đầu COM55; sau chuyển dây, CP210x UART là COM56.
-3. Đóng mọi serial monitor đang chiếm cổng. Đọc chip và flash:
+Cáp data ở cổng **UART**, console **115200 8N1**. Một cáp đủ cho nạp và console; chỉ một chương trình mở COM tại một thời điểm. Phiên này COM56, máy khác có thể khác.
 
-```powershell
-python -m esptool --port COM56 chip-id
-python -m esptool --port COM56 flash-id
-```
-
-4. Trước khi thay firmware, đọc toàn flash 16 MiB và tính SHA-256. Phiên này đã có bản sao từ trước test LED. Giữ riêng, không commit bản sao lên GitHub vì có thể chứa dữ liệu thiết bị.
+Đặt project, venv, downloads và log trên D:. Các lệnh giả sử đang ở repo, `python` thuộc venv trên D có `pyserial==3.5`, `esptool==5.5.0`:
 
 ```powershell
+$env:TEMP='D:\Codex\Temp'
+$env:TMP=$env:TEMP
+$env:PYTHONUTF8='1'
+python -m serial.tools.list_ports -v
+python -m esptool --chip esp32s31 --port COM56 chip-id
+python -m esptool --chip esp32s31 --port COM56 flash-id
+python -m esptool --chip esp32s31 --port COM56 get-security-info
 python -m esptool --chip esp32s31 --port COM56 --baud 460800 read-flash 0 ALL original-flash.bin
 Get-FileHash original-flash.bin -Algorithm SHA256
 ```
 
-## 2. Build có thể tái lập
+Giữ backup riêng, không commit. Board lần này chưa bật secure boot/flash encryption; không ghi eFuse. Backup đã làm trước bài LED, không đọc Linux đã nạp rồi gọi đó là firmware gốc.
 
-1. Mở Actions, chạy `Build ESP32-S31 Linux` bằng workflow_dispatch.
-2. Script khóa Buildroot và các nguồn trong `sources.lock.json`; lấy archive theo commit cho kernel/OpenSBI/U-Boot để tránh tải lịch sử Git lớn.
-3. Giữ defconfig chính thức, thêm `/usr/bin/s31-smoke` vào rootfs. Dùng BSP checkout đã khóa qua `ESP_BSP_DIR` thay vì package kéo nhánh động.
-4. Tải artifact thành công, kiểm tra `SHA256SUMS`. Giữ run ID, commit repo, build log và config.
-5. Kết quả: SPL + OpenSBI/U-Boot FIT + DTB + XIP kernel + cramfs được gộp vào `s31_full_flash.bin`.
+## 2. Chọn profile firmware
 
-## 3. Nạp
+### A. Image cộng đồng đã test
 
-Image gộp nạp tại **0x0**. BSP quy định header SPL **DIO, 80 MHz, 16 MiB**; không tự đổi thành thông số của bài LED.
+Đọc [prebuilt.lock.json](../prebuilt.lock.json), tải đúng asset và kiểm tra SHA:
 
 ```powershell
-python -m esptool --chip esp32s31 --port COM56 --baud 460800 write-flash 0x0 s31_full_flash.bin
+$imageLock=Get-Content prebuilt.lock.json -Raw | ConvertFrom-Json
+Invoke-WebRequest -Uri $imageLock.url -OutFile s31_full_flash.bin
+if ((Get-FileHash s31_full_flash.bin -Algorithm SHA256).Hash.ToLowerInvariant() -ne $imageLock.sha256) { throw 'SHA256 mismatch' }
 ```
 
-Chờ `Hash of data verified`. Nếu auto-reset không vào download: giữ BOOT, nhấn-thả RESET, thả BOOT rồi nạp lại. Không ghi eFuse và không cần erase toàn chip trước khi nạp image này.
+Tag `ci-d74660b8f90c-34182145900`, 14,880,768 byte. Đây là release cộng đồng, không phải binary repo này tự build. [Layout thực tế](../configs/tested-community-layout.cfg) khác layout chính thức.
 
-## 4. Kiểm thử thực tế
+Lệnh **cài mới** đã dùng trong phiên này, sau khi có backup:
 
-1. Ghi log UART **115200, 8N1**, từ reset đến shell. Xác nhận từng tầng SPL, OpenSBI, U-Boot, kernel và userspace.
-2. Chạy `uname -a`, `/proc/cpuinfo`, `/proc/meminfo`, `/proc/mtd`, `/proc/mounts`, `/proc/cmdline`.
-3. Chạy `s31-smoke`: tệp tmpfs 256 KiB, so sánh bản sao, hai tiến trình tính vòng lặp 10.000 bước, đọc danh sách mạng/USB và dmesg. Không suy ra SMP chỉ từ việc chạy hai tiến trình.
-4. Kiểm tra ghi root bị từ chối đúng như cramfs chỉ đọc; ghi `/tmp` phải thành công.
-5. Chờ tối thiểu 60 giây ở shell; kiểm tra uptime tăng và không tự reset/panic. Đây chỉ là smoke test, không phải chứng nhận ổn định dài hạn.
-6. Thử reboot phần mềm và reset phần cứng nhiều lần; phân biệt reboot với cold boot. Cold boot cần ngắt rồi cấp nguồn thật.
-7. Chỉ test Ethernet khi có dây/link: xem interface, carrier, DHCP, ping gateway. Không có cáp thì đánh dấu NOT TESTED/BLOCKED, không gọi driver lỗi.
-8. USB/GPIO/I2C chỉ kiểm kê mặc định; kiểm thử chức năng cần thiết bị và sơ đồ chân cụ thể. Không bật ngẫu nhiên GPIO hay ghi thanh ghi ngoại vi.
+```powershell
+python -m esptool --chip esp32s31 --port COM56 --baud 460800 erase-flash
+python -m esptool --chip esp32s31 --port COM56 --baud 460800 write-flash --flash-mode dio --flash-freq 80m --flash-size 16MB 0x0 s31_full_flash.bin
+```
 
-## 5. Phục hồi
+Erase và ghi image gộp có thể làm mất persistent data. Không dùng lại quy trình cài mới như update giữ dữ liệu; update cần image thành phần và layout upstream tương ứng. Chờ `Hash of data verified`. Nếu auto-reset không vào download: giữ BOOT, nhấn-thả RESET, thả BOOT rồi thử lại.
 
-Vào ROM download rồi ghi lại **đúng bản sao của board này**:
+### B. Build nguồn chính thức — chưa thành công trong phiên này
+
+Workflow `Build ESP32-S31 Linux` chạy thủ công qua Actions; job bị chặn billing trước khi thực thi. Không có compile log/artifact thành công. Sau khi xử lý billing có thể chạy lại; hoặc build trên Linux/WSL có filesystem Linux và backing volume đủ chỗ trên D:
+
+```sh
+bash scripts/build.sh
+```
+
+Cài host dependencies theo workflow. Script dùng Buildroot 2025.02, commit trong sources.lock.json, thêm s31-smoke, dùng BSP checkout riêng. Không dùng GCC bare-metal ESP-IDF làm toolchain Linux musl. Kết quả dự kiến là profile cramfs tối thiểu; không ngầm đồng nhất với image cộng đồng. Workflow/build script chưa được xác nhận end-to-end.
+
+## 3. Boot và shell
+
+```powershell
+python scripts/serial-capture.py --port COM56 --reset --seconds 40 --output evidence/boot.log
+python scripts/serial-capture.py --port COM56 --send root --seconds 5 --output evidence/login.log
+```
+
+Image đã test cho username `root` không cần password trên UART. Đọc uname, /proc/cpuinfo, /proc/meminfo, /proc/mounts, /proc/mtd. Không suy ra Linux hỗ trợ phần cứng chỉ từ thông số board.
+
+Image chạy rcS ở nền để getty lên sớm. Shell xuất hiện chưa đồng nghĩa mọi dịch vụ đã xong. Kiểm tra /run/rcS.done, /run/rcS.status, /run/rcS.log; phiên này ở uptime 33.66s đã có status 0. Log ghi không có USB swap và Wi-Fi disabled.
+
+## 4. Smoke, reboot, lưu bền
+
+Khi đã ở root shell:
+
+```powershell
+python scripts/serial-run.py --port COM56 --script scripts/board-smoke.sh --seconds 150 --output evidence/linux-smoke.log
+```
+
+Script upload qua UART rồi chạy: kiểm kê, tmpfs 256 KiB copy/cmp/checksum, root write probe có xóa, 2 worker 10.000 vòng, loopback, mạng/USB, chờ 60 giây và dmesg. Đọc từng kết quả trong log; exit 0 không tự thay cho đánh giá mọi mục kiểm kê.
+
+Tạo marker riêng ở root shell (vài byte filesystem, không ghi raw MTD):
+
+```sh
+if test ! -e /root/.s31-persist-probe; then
+  echo S31_PERSIST_20261012 > /root/.s31-persist-probe
+  echo VOLATILE > /tmp/s31-volatile-probe
+  sync
+else
+  echo PROBE_EXISTS_ABORT
+fi
+```
+
+Nếu PROBE_EXISTS_ABORT, kiểm tra marker cũ trước. Trên host:
+
+```powershell
+python scripts/serial-reboot.py --port COM56 --mode software --cycles 2 --output evidence/software-reboot.log
+python scripts/serial-reboot.py --port COM56 --mode rts --output evidence/hardware-reset.log
+```
+
+Reboot test kiểm tra về shell sớm; vòng kế tiếp có thể bắt đầu khi rcS còn chạy. Shutdown FAIL lúc đó cần đối chiếu trạng thái dịch vụ, không đánh đồng kernel không boot.
+
+Cold boot: sync, đóng serial, rút nguồn ít nhất 5 giây rồi cắm UART lại:
+
+```powershell
+python scripts/serial-reboot.py --port COM56 --mode login --output evidence/cold-boot-login.log
+```
+
+Mode login chỉ xác nhận shell/marker sau thao tác vật lý, không tự ngắt nguồn. Kết thúc xóa đúng marker đã tạo và sync; không xóa dữ liệu khác.
+
+## 5. Ngoại vi và phục hồi
+
+Ethernet/Wi-Fi cần cấu hình và mạng thử, USB cần thiết bị, GPIO/I2C/audio cần dây và sơ đồ chân. Phiên này chỉ kiểm kê; chưa test các chức năng đó. Không bật ngẫu nhiên GPIO.
+
+Muốn phục hồi dùng đúng backup riêng:
 
 ```powershell
 python -m esptool --chip esp32s31 --port COM56 --baud 460800 write-flash 0x0 original-flash.bin
 ```
 
-Xác nhận SHA/hash và reset. Đây là hướng dẫn phục hồi; không tự phục hồi nếu vẫn đang dùng Linux để test.
+Đây chỉ là hướng dẫn; kết thúc phiên vẫn để Linux trên board.
 
-## 6. Đưa kết quả lên Git
+## 6. Git
 
-Commit hướng dẫn, script, source lock, config và log đã rà soát. Giữ riêng flash backup, khóa, token, mật khẩu và dữ liệu thiết bị. Binaries build để trong Actions artifact; ghi SHA-256 vào báo cáo. Mọi PASS phải trỏ đến log thực tế, mọi bước chưa chạy phải ghi rõ.
+Commit scripts, docs, lock/config, log và SHA manifest. Không commit binary, venv, tài khoản Codex/GitHub hoặc backup. Chưa làm ghi NOT TESTED, build bị chặn ghi BLOCKED; không đổi thành PASS để hoàn tất bảng.

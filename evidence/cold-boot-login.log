@@ -1,0 +1,16 @@
+
+[HOST 2026-10-12T06:24:10.865779+00:00] BEGIN mode=login cycle=1
+
+ESP32-S31 Linux (Buildroot)
+esp32-s31 login: root
+login[147]: root login on 'console'
+~ # stty -echo
+~ # ===AFTER_BOOT===
+6.18.0-g888671b7ed45
+11.60 7.78
+0-1
+PASS_PERSIST
+PASS_TMP_CLEARED
+S31_REBOOT_CHECK_END
+~ # 
+[HOST 2026-10-12T06:24:11.989018+00:00] PASS mode=login cycle=1
