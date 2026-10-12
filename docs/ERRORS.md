@@ -42,6 +42,7 @@ Bằng chứng: [smoke](../evidence/linux-smoke.log), [software reboot](../evide
 | H04 | `UnicodeEncodeError ... cp1252` | Python Windows in nội dung HTML Unicode | Dùng PYTHONUTF8=1 / ghi log UTF-8 |
 | H05 | GitHub Actions không bắt đầu job | Account locked due to billing; annotation run 38204464647 | BLOCKED cho build nguồn; dùng community prebuilt có SHA riêng để test board |
 | H06 | Capture reboot dừng do cp1252 | Ký tự lỗi UTF-8 khi reset không in được ra stdout cp1252 | Đặt stdout UTF-8 trong script; chạy lại 2 vòng reboot đầy đủ thành công |
+| H07 | Menu esp32-config hiện mã `[...m`, `[...H` và vỡ bố cục trong Windows PowerShell | Máy host trả platform.release()=11; pyserial miniterm 3.5 chỉ tự bật ANSI khi release=='10', nên có thể bỏ qua Windows 11 | Dùng scripts/console.py bật ENABLE_VIRTUAL_TERMINAL_PROCESSING rõ ràng. --check-console đã kiểm tra mode thành công trên host, không mở UART; cần mở lại terminal người dùng để xem menu |
 
 ## Hành vi tất định — chỉ profile official minimal CHƯA TEST
 

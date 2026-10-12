@@ -25,6 +25,7 @@ Các mục dưới đây ghi theo thứ tự thực hiện. Lệnh chuẩn để
 21. Sync rồi yêu cầu người dùng rút dây 5 giây và cắm lại UART; người dùng xác nhận đã làm. Đăng nhập lại được ở uptime 11.60s, marker root còn. Không capture được ROM/kernel sớm của lần cấp nguồn đó; ghi giới hạn bằng chứng trong RESULTS.
 22. Đọc trạng thái cuối sau cold boot: uptime 392.84s, rcS.status=0, CPU online 0-1, MemAvailable 10356 kB, SwapTotal=0. Kiểm tra đúng nội dung marker trước khi xóa marker do bài test tạo; sync, để Linux và root shell chạy trên board.
 23. Giữ nguyên các boot warning trong ERRORS; phân biệt lỗi đã gặp, giới hạn profile và rủi ro chỉ xảy ra theo điều kiện. Chưa test ngoại vi/mạng ngoài hoặc soak dài hạn. Chuẩn bị commit/push script, docs, log, checksum; không kèm firmware backup. MAC được che trong bản log public, log gốc giữ riêng.
+24. Sau khi người dùng mở console và menu cấu hình, ảnh cho thấy mã ANSI in thẳng trong Windows PowerShell. Đối chiếu miniterm.py 3.5: điều kiện tự bật ANSI chỉ xét Windows 10; host thực tế Windows 11 (10.0.22631). Thêm scripts/console.py, kiểm tra console mode thành công bằng --check-console trong PTY, không mở COM56 đang dành cho người dùng. Thêm hướng dẫn Wi-Fi CLI dựa trên source; chưa đánh dấu kết nối Wi-Fi PASS.
 
 ## Tham chiếu bài kiểm tra LED trước Linux
 

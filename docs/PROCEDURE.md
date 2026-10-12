@@ -55,6 +55,26 @@ Cài host dependencies theo workflow. Script dùng Buildroot 2025.02, commit tro
 
 ## 3. Boot và shell
 
+Để người dùng nhập lệnh tương tác, mở console sau (đóng chương trình UART khác trước):
+
+```powershell
+python scripts/console.py COM56 115200 --raw --eol CR --rts 0 --dtr 0
+```
+
+Wrapper bật ANSI trên Windows 11 để menu không in thẳng mã điều khiển. Ctrl+] thoát về host; Ctrl+C gửi ngắt đến chương trình đang chạy trên board. Nhấn Enter, đăng nhập root nếu cần. Có thể dùng `esp32-config` và chọn Wireless LAN, hoặc dùng giao diện dòng lệnh dưới đây để tránh phụ thuộc menu:
+
+```sh
+esp32-config wifi configure
+esp32-config wifi enable
+esp32-config wifi status
+ip -4 addr show wlan0
+ip route
+```
+
+Lệnh configure hỏi SSID, passphrase 8–63 ký tự và nhập lại passphrase; nhập riêng trực tiếp qua UART, không đưa mật khẩu/profile Wi-Fi vào log Git. Enable có thể mất khoảng 35 giây hoặc lâu hơn khi chuẩn bị radio. Cần Connected và địa chỉ IP để xác nhận; các lệnh này được đối chiếu source của image, chưa có kết quả test kết nối Wi-Fi trong phiên smoke ban đầu.
+
+Các lệnh dưới đây dành cho tự động capture/reset, không chạy cùng lúc terminal tương tác:
+
 ```powershell
 python scripts/serial-capture.py --port COM56 --reset --seconds 40 --output evidence/boot.log
 python scripts/serial-capture.py --port COM56 --send root --seconds 5 --output evidence/login.log
