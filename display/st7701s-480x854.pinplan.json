@@ -1,0 +1,249 @@
+{
+  "status": "DRAFT_NOT_APPLIED_NOT_HARDWARE_TESTED",
+  "panel": {
+    "controller": "ST7701S",
+    "touch_controller": "GT911 (not configured)",
+    "width": 480,
+    "height": 854,
+    "exact_module_model": null
+  },
+  "format": "RGB565, ST7701S native 16-bit input",
+  "assumption": "LCD R0..R7/G0..G7/B0..B7 map directly to ST7701S DB16..23/DB8..15/DB0..7. Verify module routing before wiring.",
+  "data": [
+    {
+      "host_data_bit": 0,
+      "lcd_signal": "B0",
+      "lcd_pin": 21,
+      "st7701_pad": "DB0",
+      "gpio": 20,
+      "j2_pin": 26
+    },
+    {
+      "host_data_bit": 1,
+      "lcd_signal": "B1",
+      "lcd_pin": 22,
+      "st7701_pad": "DB1",
+      "gpio": 21,
+      "j2_pin": 27
+    },
+    {
+      "host_data_bit": 2,
+      "lcd_signal": "B2",
+      "lcd_pin": 23,
+      "st7701_pad": "DB2",
+      "gpio": 22,
+      "j2_pin": 28
+    },
+    {
+      "host_data_bit": 3,
+      "lcd_signal": "B3",
+      "lcd_pin": 24,
+      "st7701_pad": "DB3",
+      "gpio": 23,
+      "j2_pin": 29
+    },
+    {
+      "host_data_bit": 4,
+      "lcd_signal": "B4",
+      "lcd_pin": 25,
+      "st7701_pad": "DB4",
+      "gpio": 24,
+      "j2_pin": 30
+    },
+    {
+      "host_data_bit": 5,
+      "lcd_signal": "G0",
+      "lcd_pin": 13,
+      "st7701_pad": "DB8",
+      "gpio": 25,
+      "j2_pin": 31
+    },
+    {
+      "host_data_bit": 6,
+      "lcd_signal": "G1",
+      "lcd_pin": 14,
+      "st7701_pad": "DB9",
+      "gpio": 35,
+      "j2_pin": 25
+    },
+    {
+      "host_data_bit": 7,
+      "lcd_signal": "G2",
+      "lcd_pin": 15,
+      "st7701_pad": "DB10",
+      "gpio": 36,
+      "j2_pin": 24
+    },
+    {
+      "host_data_bit": 8,
+      "lcd_signal": "G3",
+      "lcd_pin": 16,
+      "st7701_pad": "DB11",
+      "gpio": 37,
+      "j2_pin": 23
+    },
+    {
+      "host_data_bit": 9,
+      "lcd_signal": "G4",
+      "lcd_pin": 17,
+      "st7701_pad": "DB12",
+      "gpio": 38,
+      "j2_pin": 22
+    },
+    {
+      "host_data_bit": 10,
+      "lcd_signal": "G5",
+      "lcd_pin": 18,
+      "st7701_pad": "DB13",
+      "gpio": 39,
+      "j2_pin": 21
+    },
+    {
+      "host_data_bit": 11,
+      "lcd_signal": "R0",
+      "lcd_pin": 5,
+      "st7701_pad": "DB16",
+      "gpio": 42,
+      "j2_pin": 20
+    },
+    {
+      "host_data_bit": 12,
+      "lcd_signal": "R1",
+      "lcd_pin": 6,
+      "st7701_pad": "DB17",
+      "gpio": 46,
+      "j2_pin": 16
+    },
+    {
+      "host_data_bit": 13,
+      "lcd_signal": "R2",
+      "lcd_pin": 7,
+      "st7701_pad": "DB18",
+      "gpio": 47,
+      "j2_pin": 13
+    },
+    {
+      "host_data_bit": 14,
+      "lcd_signal": "R3",
+      "lcd_pin": 8,
+      "st7701_pad": "DB19",
+      "gpio": 48,
+      "j2_pin": 14
+    },
+    {
+      "host_data_bit": 15,
+      "lcd_signal": "R4",
+      "lcd_pin": 9,
+      "st7701_pad": "DB20",
+      "gpio": 49,
+      "j2_pin": 11
+    }
+  ],
+  "control": [
+    {
+      "lcd_signal": "PCLK",
+      "lcd_pin": 30,
+      "gpio": 40,
+      "j2_pin": 19
+    },
+    {
+      "lcd_signal": "HS",
+      "lcd_pin": 32,
+      "gpio": 44,
+      "j2_pin": 18
+    },
+    {
+      "lcd_signal": "VS",
+      "lcd_pin": 33,
+      "gpio": 45,
+      "j2_pin": 15
+    },
+    {
+      "lcd_signal": "DE",
+      "lcd_pin": 34,
+      "gpio": 43,
+      "j2_pin": 17
+    },
+    {
+      "lcd_signal": "RST",
+      "lcd_pin": 37,
+      "gpio": 0,
+      "j2_pin": 9
+    },
+    {
+      "lcd_signal": "SDA_SPI",
+      "lcd_pin": 38,
+      "gpio": 1,
+      "j2_pin": 12
+    },
+    {
+      "lcd_signal": "SCL_SPI",
+      "lcd_pin": 39,
+      "gpio": 2,
+      "j2_pin": 7
+    },
+    {
+      "lcd_signal": "CS",
+      "lcd_pin": 40,
+      "gpio": 3,
+      "j2_pin": 10
+    }
+  ],
+  "unused_rgb_pins": [
+    10,
+    11,
+    12,
+    19,
+    20,
+    26,
+    27,
+    28
+  ],
+  "unused_rgb_action": "Tie to signal GND only after confirming native RGB565 mode and module routing; not GPIO outputs.",
+  "nc_pins": [
+    31,
+    35
+  ],
+  "gnd_pins": [
+    3,
+    29,
+    36
+  ],
+  "vcc": {
+    "lcd_pin": 4,
+    "volts": 3.3,
+    "j2_pin": 35
+  },
+  "backlight": {
+    "ledk_pin": 1,
+    "leda_pin": 2,
+    "driver": null,
+    "current_ma": null,
+    "forward_voltage": null,
+    "action": "Do not connect to GPIO or assume 3.3V/5V; dedicated driver requirements pending."
+  },
+  "reserved_gpios": [
+    58,
+    59,
+    60,
+    61
+  ],
+  "spare_gpio": 4,
+  "pixel_clock_hz": null,
+  "hporches": null,
+  "vporches": null,
+  "sync_polarities": null,
+  "spi_framing": null,
+  "init_sequence": null,
+  "linux": {
+    "kernel": "6.18.0-g888671b7ed45",
+    "display_engine_driver": "No S31 LCD DRM/fbdev driver found in the checked kernel source",
+    "device_tree_lcd_node": false,
+    "applied": false
+  },
+  "touch": {
+    "connector": null,
+    "pinout": null,
+    "configured": false
+  }
+}

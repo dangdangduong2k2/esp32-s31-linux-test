@@ -20,6 +20,10 @@ Board Function CoreBoard-1, chip rev v0.0, flash vật lý 16 MiB; console CP210
 
 Đã cài `rgb-led red|green|blue|white|off`; người dùng xác nhận LED đỏ. [Mã nguồn, cách dùng/build và các lỗi có điều kiện](docs/LINUX-LED.md). Dùng SPI phần cứng trên GPIO60, giữ kernel và kết nối Wi-Fi.
 
+## Màn hình ST7701S 480×854
+
+[Bảng dự kiến nối RGB565 trên header J2](docs/DISPLAY-PINOUT.md) đã kiểm tra phân bổ 24 GPIO, giữ UART/LED/BOOT. **Chưa apply và chưa test màn hình**; còn thiếu thông số module, backlight và driver LCD S31 trên Linux.
+
 ## Image đã test và hướng build còn bị chặn
 
 **Image đã nạp là bản cộng đồng [GrieferPig/esp32-s31-linux](https://github.com/GrieferPig/esp32-s31-linux/releases/tag/ci-d74660b8f90c-34182145900)**, tag `ci-d74660b8f90c-34182145900`, commit `d74660b8f90c6fd0c16b54115320e748766c6df7`. Nó dùng SMP, SquashFS + JFFS2/OverlayFS và có IPv6. URL và SHA-256 nằm trong [prebuilt.lock.json](prebuilt.lock.json). SHA xác nhận asset đã tải/nạp, không chứng minh binary được tự build hoặc tái lập từ source trong phiên này.
