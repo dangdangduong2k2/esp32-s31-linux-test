@@ -1,0 +1,10 @@
+stty -echo
+~ # > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > ~ # LED_INSTALL_BEGIN
+/tmp/rgb-led-install.jmOllP/rgb-led: OK
+/tmp/rgb-led-install.jmOllP/rgb-led.dtbo: OK
+/tmp/rgb-led-install.jmOllP/rgb-led.sh: OK
+PASS: 256 GRB encoding vectors, low tails, argument bounds
+Sent RGB 64 0 0 via Linux GPSPI2 -> GPIO60
+LED_INSTALL_END
+S31_RUN_EXIT=0
+~ # 

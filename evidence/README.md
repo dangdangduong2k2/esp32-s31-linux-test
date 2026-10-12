@@ -21,6 +21,10 @@
 | wifi-credential-check.json | Kết quả boolean đối chiếu trước/sau sửa; không chứa password/PSK |
 | wifi-retry.log | WPA2 Connected, DHCP và default route; nhận dạng mạng đã che |
 | wifi-data-path.log | Ping gateway 3/3 và snapshot RAM sau kết nối |
+| linux-led-first-test.log | Kiểm SHA bản upload, self-test GRB, apply overlay và gửi đỏ |
+| linux-led-install.log | Cài chương trình/overlay/wrapper, sync, gửi đỏ |
+| linux-led-check.log | Tham số lỗi, các transfer màu, remove/reapply, SPI counters, Wi-Fi carrier |
+| linux-led-visual.json | Ghi nhận người dùng xác nhận đỏ và SHA artifact, không phải đo quang học |
 
 Log UART giữ CR/ANSI và có thể có vài byte không giải mã được lúc reset. serial-run/reboot ghi bytes; serial-capture giải mã UTF-8 với replacement. Dòng [HOST ...] là thời gian UTC máy tính; giờ kernel là uptime, không phải ngày giờ lịch đã đồng bộ. Ngày thao tác ở Asia/Ho_Chi_Minh là 12/10/2026.
 

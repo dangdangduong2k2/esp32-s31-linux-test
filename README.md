@@ -16,11 +16,15 @@ Board Function CoreBoard-1, chip rev v0.0, flash vật lý 16 MiB; console CP210
 | Khởi động lại | 2 software reboot có log đầy đủ, 1 RTS reset, 1 ngắt/cấp nguồn do người dùng thực hiện đều về shell |
 | Wi-Fi bổ sung | WPA2 kết nối, DHCP cấp IPv4, ping gateway 3/3; cấu hình mật khẩu cũ không khớp, đã lưu lại và test thành công |
 
+## LED RGB từ Linux
+
+Đã cài `rgb-led red|green|blue|white|off`; người dùng xác nhận LED đỏ. [Mã nguồn, cách dùng/build và các lỗi có điều kiện](docs/LINUX-LED.md). Dùng SPI phần cứng trên GPIO60, giữ kernel và kết nối Wi-Fi.
+
 ## Image đã test và hướng build còn bị chặn
 
 **Image đã nạp là bản cộng đồng [GrieferPig/esp32-s31-linux](https://github.com/GrieferPig/esp32-s31-linux/releases/tag/ci-d74660b8f90c-34182145900)**, tag `ci-d74660b8f90c-34182145900`, commit `d74660b8f90c6fd0c16b54115320e748766c6df7`. Nó dùng SMP, SquashFS + JFFS2/OverlayFS và có IPv6. URL và SHA-256 nằm trong [prebuilt.lock.json](prebuilt.lock.json). SHA xác nhận asset đã tải/nạp, không chứng minh binary được tự build hoặc tái lập từ source trong phiên này.
 
-Hướng **build cấu hình tối thiểu chính thức Espressif** được giữ trong [sources.lock.json](sources.lock.json), `configs/upstream-*` và workflow. [Actions run 38204464647](https://github.com/dangdangduong2k2/esp32-s31-linux-test/actions/runs/38204464647) không bắt đầu job do tài khoản bị khóa billing. **Chưa có build từ nguồn thành công trong repo này.** Cấu hình chính thức có cramfs chỉ đọc, một CPU node và không bật IPv6; không dùng các đặc điểm đó mô tả image cộng đồng đã test.
+Hướng **build cấu hình tối thiểu chính thức Espressif** được giữ trong [sources.lock.json](sources.lock.json), `configs/upstream-*` và workflow. [Actions run 38204464647](https://github.com/dangdangduong2k2/esp32-s31-linux-test/actions/runs/38204464647) không bắt đầu job do tài khoản bị khóa billing. **Chưa build kernel/firmware từ nguồn thành công trong repo này.** Chương trình userspace điều khiển LED đã được build riêng và chạy trên image có sẵn. Cấu hình chính thức có cramfs chỉ đọc, một CPU node và không bật IPv6; không dùng các đặc điểm đó mô tả image cộng đồng đã test.
 
 ## Tài liệu và bằng chứng
 

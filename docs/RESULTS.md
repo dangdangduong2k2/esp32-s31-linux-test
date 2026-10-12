@@ -19,11 +19,12 @@ Các PASS Linux thuộc **image cộng đồng trong prebuilt.lock.json**, khôn
 | T13 | Rút nguồn 5 giây rồi cắm UART | PASS có giới hạn | Người dùng xác nhận thao tác; cold-boot-login ghi shell uptime 11.60s và marker còn. Không thu ROM/boot log sớm của lần cắm này; không đo điện áp |
 | T14 | Ethernet | NOT TESTED | Không có Ethernet trong kiểm kê smoke ban đầu; không suy ra Ethernet hỏng |
 | T15 | USB thiết bị ngoài | NOT TESTED | Root hub `usb1`, `1-0:1.0` có; chưa test thiết bị ngoài |
-| T16 | GPIO/I2C/audio/Bluetooth | NOT TESTED | GPIO node có; I2C node/soundcard vắng; Wi-Fi được kiểm tra riêng ở T20 |
+| T16 | GPIO tổng quát/I2C/audio/Bluetooth | NOT TESTED | GPIO node có; I2C node/soundcard vắng; Wi-Fi được kiểm tra riêng ở T20; RGB qua matrix/SPI tại T21 |
 | T17 | Loopback IPv4 | PASS | Smoke: ping 127.0.0.1, 3/3 gói, 0% loss; không chứng minh có Internet |
 | T18 | Tmpfs không lưu qua reboot | PASS | Setup có marker VOLATILE; recovery sau reboot đầu báo PASS_TMP_CLEARED. Các reboot sau chỉ kiểm tra marker tiếp tục vắng |
 | T19 | Dịch vụ khởi động xong | PASS | [Services settled](../evidence/services-settled.log): uptime 33.66s, rcS.status=0, rcS.done, syslog/klog/network/crond OK; chưa cấu hình mạng ngoài |
 | T20 | Wi-Fi WPA2, DHCP, ping gateway | PASS sau sửa cấu hình | [Kết nối](../evidence/wifi-retry.log), [ping](../evidence/wifi-data-path.log): Connected, APPLY_RC=0, IPv4/default route, ping 3/3, 0% loss. Khóa profile cũ không khớp mật khẩu người dùng cung cấp; đã xác minh lại trước khi kết nối |
+| T21 | RGB từ Linux qua GPSPI2/GPIO60 | PASS đỏ, giới hạn ở mức smoke | [Log](../evidence/linux-led-check.log), [xác nhận đỏ](../evidence/linux-led-visual.json); các màu khác chỉ kiểm transfer; SPI 0 lỗi, Wi-Fi carrier vẫn 1. [Chi tiết](LINUX-LED.md) |
 
 Reboot đầu đưa board về shell và giữ marker nhưng công cụ host lỗi encoding khi ghi console. Log giữ riêng; không cộng vào hai vòng có log đầy đủ.
 

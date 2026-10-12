@@ -40,3 +40,7 @@ Bổ sung Wi-Fi ngày 12/10/2026: người dùng gửi log quét AP thành công
 - Build ban đầu chạy trước khi pip xong gây thiếu module; lần sau thiếu constraints v6.2 và ESP_IDF_VERSION, đã bổ sung.
 - Trình biên dịch báo khởi tạo `{0}` cho struct rỗng của RMT; sửa `{}` đúng API.
 - esptool xác nhận hash sau nạp; log RMT thành công và người dùng xác nhận board sống. Các lỗi này thuộc bài ESP-IDF trước đó, không quy thành lỗi Linux.
+
+## Bổ sung LED trực tiếp từ Linux
+
+Người dùng yêu cầu mở console và viết code. Đối chiếu source đúng kernel 888671b7ed45: RMT chưa có driver sẵn nhưng GPSPI có FIFO 64 byte và overlay hỗ trợ tuyến GPIO60. Viết `led/rgb-led.c` dùng syscall Linux RV32; tạo overlay chỉ định tuyến một chân, build trên D bằng compiler RISC-V có sẵn. Chuyển qua UART, xác minh SHA, self-test 256 bộ GRB và bật đỏ. Người dùng trả lời “Đỏ”. Cài wrapper/chương trình/overlay vào root OverlayFS và sync. Kiểm tham số lỗi, gửi các màu, gỡ/apply lại overlay: PASS; SPI 0 lỗi, Wi-Fi carrier=1. Mở cửa sổ console Windows riêng cho người dùng. Không reboot hoặc flash lại. Tài liệu đầy đủ: [LINUX-LED.md](LINUX-LED.md).

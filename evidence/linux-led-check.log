@@ -1,0 +1,35 @@
+stty -echo
+~ # > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > ~ # LED_CHECK_BEGIN
+6.18.0-g888671b7ed45
+PASS: 256 GRB encoding vectors, low tails, argument bounds
+Usage: rgb-led red|green|blue|white|off
+       rgb-led R G B     (each 0..255)
+Usage: rgb-led red|green|blue|white|off
+       rgb-led R G B     (each 0..255)
+Usage: rgb-led red|green|blue|white|off
+       rgb-led R G B     (each 0..255)
+Usage: rgb-led red|green|blue|white|off
+       rgb-led R G B     (each 0..255)
+PASS_INVALID_ARGUMENTS
+Sent RGB 0 0 0 via Linux GPSPI2 -> GPIO60
+Sent RGB 0 64 0 via Linux GPSPI2 -> GPIO60
+Sent RGB 0 0 64 via Linux GPSPI2 -> GPIO60
+Sent RGB 32 32 32 via Linux GPSPI2 -> GPIO60
+Sent RGB 64 0 0 via Linux GPSPI2 -> GPIO60
+Sent RGB 64 0 0 via Linux GPSPI2 -> GPIO60
+PASS_COLOR_TRANSFERS
+Sent RGB 64 0 0 via Linux GPSPI2 -> GPIO60
+PASS_OVERLAY_REAPPLY
+active-count: 2
+active: radio-wifi id=1 gpios=0000000000000000
+active: rgb-led id=2 gpios=1000000000000000
+persisted:
+radio-wifi
+gpiochip0 60	unnamed         	input consumer="kernel"
+SPI_errors=0
+SPI_timedout=0
+SPI_transfers=2
+WIFI_CARRIER=1
+LED_CHECK_END
+S31_RUN_EXIT=0
+~ # 

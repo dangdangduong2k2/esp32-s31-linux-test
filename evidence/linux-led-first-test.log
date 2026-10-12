@@ -1,0 +1,17 @@
+stty -echo
+~ # > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > ~ # LED_TEST_BEGIN
+6.18.0-g888671b7ed45
+/tmp/s31-led/rgb-led: OK
+/tmp/s31-led/esp32s31-overlay-rgb-led.dtbo: OK
+PASS: 256 GRB encoding vectors, low tails, argument bounds
+rgb-led.data=60
+crw-------    1 root     root      153,   0 Jan  1 01:05 [1;35m/dev/spidev2.0[m
+Sent RGB 64 0 0 via Linux GPSPI2 -> GPIO60
+active-count: 2
+active: radio-wifi id=1 gpios=0000000000000000
+active: rgb-led id=2 gpios=1000000000000000
+persisted:
+radio-wifi
+LED_TEST_END
+S31_RUN_EXIT=0
+~ # 

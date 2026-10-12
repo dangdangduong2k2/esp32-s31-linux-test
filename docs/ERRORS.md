@@ -85,3 +85,7 @@ Bằng chứng: [smoke](../evidence/linux-smoke.log), [software reboot](../evide
 | R20 | Bản preview thay đổi upstream | Build trước thành công nhưng build mới hỏng khi dùng branch động; dùng commit lock và lưu config/log |
 
 Nguồn kiểm chứng chính: [BSP layout](https://github.com/espressif/esp-linux-bsp/blob/22455bf67ccc1aace91a547557af43fd85192281/configs/esp32s31-layout.cfg), [rootfs hook](https://github.com/espressif/esp-buildroot-external/blob/fb8dca11dbf213db1648c25145c28673937f576c/board/espressif/esp32s31/rootfs-cramfs.sh), [kernel config](https://github.com/espressif/linux/blob/dc0e3821e39bd7c169cefd274691e1998a844028/arch/riscv/configs/esp32s31_minimal_defconfig), [DTS](https://github.com/espressif/linux/blob/dc0e3821e39bd7c169cefd274691e1998a844028/arch/riscv/boot/dts/espressif/esp32s31.dts).
+
+## Bổ sung RGB trên Linux
+
+Không có `/sys/class/leds` hoặc driver RMT sẵn trong image đã kiểm tra. Đã giải quyết bằng GPSPI2 tạo xung cho WS2812, không coi thiếu RMT là board hỏng. [LINUX-LED.md](LINUX-LED.md) ghi rõ điều kiện kernel, chân, quyền, tranh chấp SPI và giới hạn xác minh màu/timing.
