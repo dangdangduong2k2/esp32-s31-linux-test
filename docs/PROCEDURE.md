@@ -71,7 +71,7 @@ ip -4 addr show wlan0
 ip route
 ```
 
-Lệnh configure hỏi SSID, passphrase 8–63 ký tự và nhập lại passphrase; nhập riêng trực tiếp qua UART, không đưa mật khẩu/profile Wi-Fi vào log Git. Enable có thể mất khoảng 35 giây hoặc lâu hơn khi chuẩn bị radio. Cần Connected và địa chỉ IP để xác nhận; các lệnh này được đối chiếu source của image, chưa có kết quả test kết nối Wi-Fi trong phiên smoke ban đầu.
+Lệnh configure hỏi SSID, passphrase 8–63 ký tự và nhập lại passphrase; nhập riêng trực tiếp qua UART, không đưa mật khẩu/profile Wi-Fi vào log Git. Enable có thể mất khoảng 35 giây hoặc lâu hơn khi chuẩn bị radio. Cần Connected và địa chỉ IP để xác nhận. Bài bổ sung đã đạt WPA2, DHCP và ping gateway sau khi sửa mật khẩu lưu sai; xem T20 trong RESULTS. Thông báo Successfully initialized wpa_supplicant chưa chứng minh đã kết nối.
 
 Các lệnh dưới đây dành cho tự động capture/reset, không chạy cùng lúc terminal tương tác:
 

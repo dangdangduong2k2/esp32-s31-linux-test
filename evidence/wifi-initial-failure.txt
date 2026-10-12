@@ -1,0 +1,9 @@
+Provenance: excerpt of dmesg pasted by the user in this chat on 2026-10-12.
+Only diagnostic lines retained; nearby network names/BSSIDs omitted.
+Not an independently captured full UART session.
+
+[ 2494.582173] esp32s31-wifi: scan complete status=0 aps=3
+[ 2494.677406] [S31] Wi-Fi set_config rc=0 security=WPA2-PSK
+[ 2494.683107] [S31] Wi-Fi connect submit rc=0
+[ 2497.943663] [S31] Wi-Fi STA disconnected reason=15
+[ 2497.945180] esp32s31-wifi: disconnected reason=15 connecting=1

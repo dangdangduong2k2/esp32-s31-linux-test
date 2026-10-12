@@ -17,6 +17,9 @@ Phạm vi: board Function CoreBoard-1, hai profile phải phân biệt: **commun
 | L09 | `Starting USB swap: no /dev/sd* device found`; SwapTotal=0 | Không có USB storage trong bài này, không tạo swap. Không lỗi boot; RAM vẫn hữu hạn |
 | L10 | Chỉ có interface lo | rcS ghi `Wi-Fi disabled`. Chưa cấu hình/test mạng ngoài; không gọi là lỗi driver Ethernet/Wi-Fi |
 | L11 | Một vài byte hỏng lúc reset | Host cp1252 lỗi khi in ký tự replacement làm dừng capture lần đầu. Sửa stdout UTF-8 trong cả 3 script; log binary giữ nguyên byte nhận; board vẫn reboot thành công |
+| L12 | Wi-Fi quét được AP, submit rc=0 nhưng disconnected reason=15 | Người dùng gửi log; mã 15 là timeout bắt tay 4 bước theo Espressif. Đối chiếu PSK bằng PBKDF2 tại host xác nhận cấu hình cũ không khớp mật khẩu người dùng cung cấp; lưu lại, đối chiếu khớp, WPA2/DHCP/ping gateway thành công. Không dùng riêng reason=15 để kết luận mọi trường hợp đều sai mật khẩu |
+
+Nguồn ý nghĩa mã Wi-Fi: [Espressif station reason codes](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-guides/wifi-driver/station-scenarios.html). Bằng chứng bổ sung: [failure excerpt do người dùng gửi](../evidence/wifi-initial-failure.txt), [kết quả đối chiếu không chứa bí mật](../evidence/wifi-credential-check.json), [kết nối](../evidence/wifi-retry.log), [data path](../evidence/wifi-data-path.log).
 
 Bằng chứng: [smoke](../evidence/linux-smoke.log), [software reboot](../evidence/software-reboot.log), [dịch vụ sớm](../evidence/services-after-reboot.log), [dịch vụ hoàn tất](../evidence/services-settled.log). Các cảnh báo còn xuất hiện không được đánh dấu đã khắc phục.
 

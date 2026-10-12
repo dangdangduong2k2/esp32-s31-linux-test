@@ -1,0 +1,18 @@
+esp32-config wifi enable; echo WIFI_APPLY_RC=$?; esp32-config wifi status; i
+p -4 addr show wlan0; ip route
+Successfully initialized wpa_supplicant
+Wi-Fi connected on wlan0; DHCP lease acquired.
+Bluetooth disabled.
+WIFI_APPLY_RC=0
+Saved setting : Enabled
+Interface     : wlan0
+Connection    : Connected
+Network name  : [SSID_REDACTED]
+IPv4 address  : [BOARD_IPV4]
+Network saved : Yes
+4: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
+    inet [BOARD_IPV4]/24 brd [LAN_BROADCAST] scope global wlan0
+       valid_lft forever preferred_lft forever
+default via [GATEWAY_IPV4] dev wlan0 
+[LAN_SUBNET]/24 dev wlan0 scope link  src [BOARD_IPV4] 
+~ # 

@@ -27,7 +27,11 @@ Các mục dưới đây ghi theo thứ tự thực hiện. Lệnh chuẩn để
 23. Giữ nguyên các boot warning trong ERRORS; phân biệt lỗi đã gặp, giới hạn profile và rủi ro chỉ xảy ra theo điều kiện. Chưa test ngoại vi/mạng ngoài hoặc soak dài hạn. Chuẩn bị commit/push script, docs, log, checksum; không kèm firmware backup. MAC được che trong bản log public, log gốc giữ riêng.
 24. Sau khi người dùng mở console và menu cấu hình, ảnh cho thấy mã ANSI in thẳng trong Windows PowerShell. Đối chiếu miniterm.py 3.5: điều kiện tự bật ANSI chỉ xét Windows 10; host thực tế Windows 11 (10.0.22631). Thêm scripts/console.py, kiểm tra console mode thành công bằng --check-console trong PTY, không mở COM56 đang dành cho người dùng. Thêm hướng dẫn Wi-Fi CLI dựa trên source; chưa đánh dấu kết nối Wi-Fi PASS.
 
+Bổ sung Wi-Fi ngày 12/10/2026: người dùng gửi log quét AP thành công nhưng WPA2 disconnected reason=15 và yêu cầu kiểm tra mật khẩu. Sau khi người dùng nhả COM56, đọc profile chỉ trong bộ nhớ và đối chiếu PSK PBKDF2-SHA1 (SSID salt, 4096 vòng, 32 byte) với mật khẩu họ cung cấp: profile cũ không khớp. Cấu hình lại qua prompt ẩn, đối chiếu khớp, chạy enable: Connected, DHCP lease acquired, APPLY_RC=0. Ping gateway 3/3, 0% loss, RTT trung bình 18.952 ms; MemAvailable 7884 kB. Đóng serial sau kiểm tra, để Wi-Fi hoạt động. Không ghi mật khẩu hoặc PSK vào log/file/repo; bản log public che SSID/MAC/IP LAN. Chưa reboot để kiểm tra tự reconnect Wi-Fi.
+
 ## Tham chiếu bài kiểm tra LED trước Linux
+
+
 
 - Chip ESP32-S31 revision v0.0, flash 16 MiB; nạp qua COM55 thành công.
 - Sao lưu 16,777,216 byte trước khi nạp LED; SHA-256 `fd8b53fde3ba788ed8c4e6178f91a64a346a0072072400897dc2b4a704da47ee`.

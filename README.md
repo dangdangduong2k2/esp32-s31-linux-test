@@ -14,6 +14,7 @@ Board Function CoreBoard-1, chip rev v0.0, flash vật lý 16 MiB; console CP210
 | Lưu bền | Root OverlayFS ghi được; marker còn qua software reboot, RTS reset và ngắt/cấp nguồn |
 | Ổn định ngắn | Uptime 5960.43 → 6020.53 giây, không thấy panic/reset trong cửa sổ này |
 | Khởi động lại | 2 software reboot có log đầy đủ, 1 RTS reset, 1 ngắt/cấp nguồn do người dùng thực hiện đều về shell |
+| Wi-Fi bổ sung | WPA2 kết nối, DHCP cấp IPv4, ping gateway 3/3; cấu hình mật khẩu cũ không khớp, đã lưu lại và test thành công |
 
 ## Image đã test và hướng build còn bị chặn
 
@@ -29,6 +30,6 @@ Hướng **build cấu hình tối thiểu chính thức Espressif** được gi
 - [Lỗi đã gặp, hành vi theo cấu hình và lỗi có điều kiện](docs/ERRORS.md).
 - [Danh mục log và giới hạn bằng chứng](evidence/README.md).
 
-USB chỉ kiểm kê root hub; GPIO có thiết bị character; chưa có `/dev/i2c*` hoặc soundcard trong phiên này. Ethernet, Wi-Fi, Bluetooth, audio và ngoại vi chưa được xác nhận hoạt động. Image cho root login qua UART không hỏi mật khẩu; đây không phải cấu hình để triển khai dịch vụ mạng công khai.
+USB chỉ kiểm kê root hub; GPIO có thiết bị character; chưa có `/dev/i2c*` hoặc soundcard trong phiên smoke. Wi-Fi đã được test bổ sung: kết nối WPA2, DHCP và ping gateway đạt; chưa test Internet/DNS, roaming hoặc reconnect sau reboot. Ethernet, Bluetooth, audio và ngoại vi khác chưa được xác nhận hoạt động. Image cho root login qua UART không hỏi mật khẩu; đây không phải cấu hình để triển khai dịch vụ mạng công khai.
 
 Không thể đảm bảo liệt kê mọi lỗi tồn tại. Repo phân biệt lỗi đã quan sát, điều kiện tất định của từng cấu hình và rủi ro chưa tái hiện. Flash backup riêng được giữ ngoài Git; không upload backup, mật khẩu hoặc token.

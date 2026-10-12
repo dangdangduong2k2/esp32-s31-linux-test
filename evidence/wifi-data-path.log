@@ -1,0 +1,16 @@
+echo ===WIFI_DATA_PATH===; ping -c 3 -W 2 [GATEWAY_IPV4]; echo GATEWAY_PING_RC=
+$?; grep -E "MemTotal|MemAvailable" /proc/meminfo; echo ===WIFI_DATA_PATH_END===
+===WIFI_DATA_PATH===
+PING [GATEWAY_IPV4] ([GATEWAY_IPV4]): 56 data bytes
+64 bytes from [GATEWAY_IPV4]: seq=0 ttl=64 time=11.614 ms
+64 bytes from [GATEWAY_IPV4]: seq=1 ttl=64 time=11.714 ms
+64 bytes from [GATEWAY_IPV4]: seq=2 ttl=64 time=33.528 ms
+
+--- [GATEWAY_IPV4] ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 11.614/18.952/33.528 ms
+GATEWAY_PING_RC=0
+MemTotal:          15640 kB
+MemAvailable:       7884 kB
+===WIFI_DATA_PATH_END===
+~ # 
