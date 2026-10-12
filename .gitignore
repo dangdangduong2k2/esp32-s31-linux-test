@@ -1,0 +1,8 @@
+.work/
+dist/
+private/
+*.bin
+*.elf
+*.vhdx
+__pycache__/
+*.pyc
